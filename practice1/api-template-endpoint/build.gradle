@@ -1,0 +1,6 @@
+dependencies {
+    api project(":api-template-aggregate")
+    api project(":api-template-feature")
+
+    implementation "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
+}

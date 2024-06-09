@@ -1,0 +1,5 @@
+rootProject.name = 'rest-api-template'
+include 'api-template-boot'
+include 'api-template-aggregate'
+include 'api-template-endpoint'
+include 'api-template-feature'

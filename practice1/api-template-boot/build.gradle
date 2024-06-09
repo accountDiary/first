@@ -1,0 +1,30 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin")
+    }
+}
+
+
+plugins {
+    id 'org.springframework.boot' version '3.2.4'
+}
+
+dependencies {
+    api project(":api-template-endpoint")
+
+    implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${myBatisVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
+//    implementation 'com.oracle.database.jdbc:ojdbc8:19.8.0.0'
+    implementation 'com.oracle.database.security:osdt_cert'
+    implementation 'com.oracle.database.security:oraclepki'
+    implementation 'com.oracle.database.security:osdt_core'
+
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
