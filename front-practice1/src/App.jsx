@@ -30,7 +30,6 @@ function App() {
                 setUserList(response.data.userList);
                 console.log("1. ", response.data.userList);
                 console.log("2. ", response.data);
-                alert(response.data.userList);
             })
             .catch(error => {
                 console.error("error", error);
