@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import './App.css';
-import FullCalendar1 from './Container/Calendar';
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+import "./App.css";
+import FullCalendar from "./Container/Calendar";
+import Header from "./Container/Header/Header";
+import Footer from "./Container/Footer/Footer";
 
 function App() {
     // const [message, setMessage] = useState("");
@@ -38,8 +40,8 @@ function App() {
 
     return (
       <div className="App">
-
-        <div>
+        <Header />
+        {/* <div>
             {userList.map
                 (user => (
                     <div key={user.user_id}>
@@ -48,10 +50,11 @@ function App() {
                     </div>
                 ))
             }
-        </div>
+        </div> */}
         <div className="Calendar">
-            <FullCalendar1 />
+            <FullCalendar />
         </div>
+        <Footer />
       </div>
     )
 }
