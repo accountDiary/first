@@ -6,11 +6,23 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
     return (
-        <div className="Header">
-            헤더입니당.
-            <Button variant="login" size="sm">Login</Button>
-            <Button variant="signed" size="md"><FontAwesomeIcon icon={faUser} /></Button>
-        </div>
+        <>
+            <div className="Header">
+                헤더입니당.
+                <Button
+                    variant="login"
+                    size="sm"
+                >
+                    Login
+                </Button>
+                <Button
+                    variant="signed"
+                    size="md"
+                >
+                    <FontAwesomeIcon icon={faUser} />
+                </Button>
+            </div>
+        </>
     )
 }
 export default Header;

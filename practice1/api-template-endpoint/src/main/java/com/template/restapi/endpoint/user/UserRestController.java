@@ -1,7 +1,9 @@
 package com.template.restapi.endpoint.user;
 
+import com.template.restapi.aggregate.user.domain.entity.PostDto;
 import com.template.restapi.aggregate.user.domain.entity.UserDto;
 import com.template.restapi.endpoint.user.request.UserQueryRequest;
+import com.template.restapi.feature.user.service.PostService;
 import com.template.restapi.feature.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,13 @@ import java.util.Map;
 public class UserRestController {
 
     private final UserService userService;
+    private final PostService postService;
 
-    public UserRestController(UserService userService) {
+    public UserRestController(UserService userService, PostService postService) {
         this.userService = userService;
+        this.postService = postService;
     }
+
 
     /*
     * Controller Example
@@ -48,9 +53,11 @@ public class UserRestController {
         Map<String, Object> resultMap = new HashMap<>();
 
         List<UserDto> userList = userService.findUserList();
-
+        PostDto post = postService.selectPost();
         resultMap.put("userList", userList);
         System.out.println("유저리스트: " + userList);
+        System.out.println("포스트: " + post);
+
         return resultMap;
     }
 

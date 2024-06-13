@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.template.restapi.aggregate.user.store.repository.PostRepository">
+
+    <!-- 해당하는 유저 번호 / 날짜의 게시글만 골라오기-->
+    <select id="selectPost" resultType="PostDto">
+        SELECT *
+        FROM post
+        WHERE user_id = 2 AND DATE(post_date) = '2024-06-13'
+    </select>
+
+</mapper>

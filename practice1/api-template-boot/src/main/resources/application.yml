@@ -7,15 +7,11 @@
 #    username: admin
 #    password: admin
 spring:
-    datasource:
-#      driver-class-name: oracle.jdbc.driver.OracleDriver # log 찍기 위한 driver class
-      driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:oracle:thin:@account_high?TNS_ADMIN=C:/Wallet_account
-      username: admin
-      password: Account1234!
-#      url: jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl
-#      username: SOYUL
-#      password: SOYUL0931
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/accountDiary01?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    username: admin
+    password: 0931
 
 batch:
     jdbc:
