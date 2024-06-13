@@ -6,7 +6,7 @@
     <select id="selectPost" resultType="PostDto">
         SELECT *
         FROM post
-        WHERE user_id = 2 AND DATE(post_date) = '2024-06-13'
+        WHERE user_id = #{user_id} AND DATE(post_date) = #{post_date}
     </select>
 
 </mapper>

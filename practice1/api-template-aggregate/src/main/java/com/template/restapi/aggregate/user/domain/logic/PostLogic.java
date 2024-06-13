@@ -5,8 +5,6 @@ import com.template.restapi.aggregate.user.domain.entity.PostDto;
 import com.template.restapi.aggregate.user.store.PostStore;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class PostLogic {
     private final PostStore postStore;

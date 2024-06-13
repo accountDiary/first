@@ -1,27 +1,5 @@
 import styled, { css } from "styled-components";
 
-const StyledButton = styled.button`
-    ${(p) => p.sizeStyle}
-    ${(p) => p.variantStyle}
-
-    margin: 0;
-    border: none;
-    cursor: pointer;
-    font-size: var(--button-font-size, 1rem);
-    padding: var(--button-padding, 12px 16px);
-    // background-color: var(--button-bg-color, #94e8ff);
-    color: var(--button-color, #ffffff);
-
-    &:hover {
-        background-color: var(--button-hover-bg-color, #42a4ff);
-    }
-
-    &:disabled {
-        cursor: default;
-        opacity: 0.5;
-        background-color: var(--button-bg-color, #42a4ff);
-    }
-`
 const SIZES = {
     sm: css`
       --button-font-size: 0.875rem;
@@ -30,12 +8,12 @@ const SIZES = {
     `,
     md: css`
       --button-font-size: 1rem;
-      --button-padding: 0.5rem;
+      --button-padding: 0.65rem;
       --button-radius: 2.15rem;
     `,
     lg: css`
       --button-font-size: 1.25rem;
-      --button-padding: 0 1.15rem;
+      --button-padding: 1.15rem;
       --button-radius: 2.75rem;
     `,
 };
@@ -47,7 +25,7 @@ const VARIANTS = {
     `,
     signed: css`
         background-color: var(--button-bg-color, #4dd9ff);
-        border-radius: var(--border-radius, 50px);
+        border-radius: var(--border-radius, 50%);
     `,
     save: css`
     
@@ -59,7 +37,9 @@ const VARIANTS = {
     
     `,
     search: css`
-    
+        margin-left: 0.5rem;
+        border-radius: var(--border-radius, 50%);
+        background-color: var(--button-bg-color, #94e8ff);
     `,
     diary: css`
     
@@ -88,11 +68,35 @@ function Button({ disabled, children, size, variant }) {
     return (
         <StyledButton
             disabled={disabled}
-            sizeStyle={sizeStyle}
-            variantStyle={variantStyle}
+            $sizeStyle={sizeStyle}
+            $variantStyle={variantStyle}
         >
             {children}
         </StyledButton>
     );
 }
+
+const StyledButton = styled.button`
+    ${(props) => props.$sizeStyle}
+    ${(props) => props.$variantStyle}
+
+    // margin: 0;
+    border: none;
+    cursor: pointer;
+    font-size: var(--button-font-size, 1rem);
+    padding: var(--button-padding);
+    // background-color: var(--button-bg-color, #94e8ff);
+    color: var(--button-color, #ffffff);
+
+    &:hover {
+        background-color: var(--button-hover-bg-color, #42a4ff);
+    }
+
+    &:disabled {
+        cursor: default;
+        opacity: 0.5;
+        background-color: var(--button-bg-color, #42a4ff);
+    }
+`
+
 export default Button;
