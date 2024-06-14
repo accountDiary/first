@@ -38,8 +38,11 @@ const VARIANTS = {
     `,
     search: css`
         margin-left: 0.5rem;
-        border-radius: var(--border-radius, 50%);
-        background-color: var(--button-bg-color, #94e8ff);
+        color: var(--button-color,#94e8ff);
+        background-color: var(--button-bg-color, none);
+        &:hover {
+            background-color: var(--button-hover-bg-color, none);
+        }
     `,
     diary: css`
     
@@ -86,11 +89,11 @@ const StyledButton = styled.button`
     font-size: var(--button-font-size, 1rem);
     padding: var(--button-padding);
     // background-color: var(--button-bg-color, #94e8ff);
-    color: var(--button-color, #ffffff);
+    // color: var(--button-color, #ffffff);
 
-    &:hover {
-        background-color: var(--button-hover-bg-color, #42a4ff);
-    }
+    // &:hover {
+    //     background-color: var(--button-hover-bg-color, #42a4ff);
+    // }
 
     &:disabled {
         cursor: default;

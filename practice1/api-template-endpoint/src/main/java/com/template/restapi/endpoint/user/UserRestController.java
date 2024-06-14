@@ -41,7 +41,8 @@ public class UserRestController {
         System.out.println(userList);
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
-
+    
+    // 확인 완료
     @GetMapping("/test/hello")
     @ResponseBody
     public String hello() {

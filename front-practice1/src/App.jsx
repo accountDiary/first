@@ -1,62 +1,56 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import "./App.css";
-import FullCalendar from "./Container/Calendar";
 import Header from "./Container/Header/Header";
 import Footer from "./Container/Footer/Footer";
+import Search from "./Container/Search/Search";
+import FullCalendar from "./Container/Calendar";
 
 function App() {
-    // const [message, setMessage] = useState("");
-    const [userList, setUserList] = useState([]);
+
+    const [onePost, setOnePost] = useState();
 
     useEffect(() => {
-            // hello();
-            userData();
+        loadPost();
     }, []);
 
-    // const hello = async() => {
-    //     await axios
-    //         .get("/api/user/test/hello")
-    //         .then(response => {
-    //             setMessage(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error("error", error);
-    //         });
-    // }
-
-    const userData = async() => {
+    const loadPost = async() => {
         await axios
-            .get("/api/user/test/list")
-            .then(response => {
-                setUserList(response.data.userList);
-                console.log("1. ", response.data.userList);
-                console.log("2. ", response.data);
-            })
-            .catch(error => {
-                console.error("error", error);
-            });
+         .post("/post/day")
+         .then(response => {
+            setOnePost(response.data.onePost);
+             console.log("1. ", response.data.onePost);
+             console.log("2. ", response.data);
+         })
+         .catch(error => {
+             console.error("error", error);
+         });
     }
 
     return (
-      <div className="App">
-        <Header />
-        {/* <div>
-            {userList.map
-                (user => (
-                    <div key={user.user_id}>
-                        <p>이름: {user.user_name}</p>
-                        <p>이메일: {user.user_email}</p>
-                    </div>
-                ))
-            }
-        </div> */}
-        <div className="Calendar">
-            <FullCalendar />
+        <div className="App">
+            <div>
+            {onePost ? (
+                <div>
+                    <h1>작성자: {onePost.post_writer}</h1>
+                    <p>{onePost.content}</p>
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
+            </div>
+
+
+            <Header />
+            <Search></Search>
+            
+            
+            
+            <div className="Calendar">
+                <FullCalendar />
+            </div>
+            <Footer />
         </div>
-        <Footer />
-      </div>
     )
 }
-
 export default App;
