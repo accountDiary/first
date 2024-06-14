@@ -54,7 +54,7 @@ public class UserRestController {
         Map<String, Object> resultMap = new HashMap<>();
 
         List<UserDto> userList = userService.findUserList();
-        PostDto post = postService.selectPost();
+        PostDto post = postService.showPost();
         resultMap.put("userList", userList);
         System.out.println("유저리스트: " + userList);
         System.out.println("포스트: " + post);

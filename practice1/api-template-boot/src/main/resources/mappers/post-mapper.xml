@@ -10,4 +10,15 @@
 <!--        AND DATE(post_date) = #{post_date}-->
     </select>
 
+    <insert id="insertPost" parameterType="PostDto">
+        INSERT INTO post
+            (user_id, post_writer, title, sub_title, content)
+        VALUES
+            (
+                #{user_id},
+                (SELECT user_nickname FROM user_info WHERE user_id = #{user_id}),
+                #{title}, #{sub_title}, #{content}
+            )
+    </insert>
+
 </mapper>

@@ -15,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostService {
     private final PostLogic postLogic;
 
-    public PostDto selectPost() {
-        return postLogic.selectPost();
+    public PostDto showPost() {
+        return postLogic.showPost();
     }
+
+    public PostDto savePost() { return postLogic.savePost(); }
 }

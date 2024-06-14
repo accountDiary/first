@@ -11,7 +11,9 @@ public class PostLogic {
 
     public PostLogic(PostStore postStore) { this.postStore = postStore; }
 
-    public PostDto selectPost() {
+    public PostDto showPost() {
         return postStore.selectPost();
     }
+
+    public PostDto savePost() { return postStore.insertPost(); }
 }

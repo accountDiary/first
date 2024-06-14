@@ -20,7 +20,6 @@ function App() {
          .then(response => {
             setOnePost(response.data.onePost);
              console.log("1. ", response.data.onePost);
-             console.log("2. ", response.data);
          })
          .catch(error => {
              console.error("error", error);
@@ -30,14 +29,16 @@ function App() {
     return (
         <div className="App">
             <div>
-            {onePost ? (
-                <div>
-                    <h1>작성자: {onePost.post_writer}</h1>
-                    <p>{onePost.content}</p>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+                {onePost ? (
+                    <div>
+                        <p>작성자: {onePost.post_writer}</p>
+                        <p>제목: {onePost.title}</p>
+                        <p>부제목: {onePost.sub_title}</p>
+                        <p>내용: {onePost.content}</p>
+                    </div>
+                ) : (
+                    <p>만약 null값이 나온다면 여기엔 글 작성란을 보여주거나 하기...</p>
+                )}
             </div>
 
 
