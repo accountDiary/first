@@ -37,7 +37,7 @@ function App() {
                         <p>내용: {onePost.content}</p>
                     </div>
                 ) : (
-                    <p>만약 null값이 나온다면 여기엔 글 작성란을 보여주거나 하기...</p>
+                    <p>만약 null값이 나온다면 여기엔 글 작성란을 보여주거나 하기...readonly를 풀어서??</p>
                 )}
             </div>
 

@@ -25,36 +25,4 @@ public class FileDto {
     private Integer post_id;
     private String file_board;
     private Date file_regDate;
-
-    public Integer getFile_id() {
-        return file_id;
-    }
-
-    public void setFile_id(Integer file_id) {
-        this.file_id = file_id;
-    }
-
-    public Integer getPost_id() {
-        return post_id;
-    }
-
-    public void setPost_id(Integer post_id) {
-        this.post_id = post_id;
-    }
-
-    public String getFile_board() {
-        return file_board;
-    }
-
-    public void setFile_board(String file_board) {
-        this.file_board = file_board;
-    }
-
-    public Date getFile_regDate() {
-        return file_regDate;
-    }
-
-    public void setFile_regDate(Date file_regDate) {
-        this.file_regDate = file_regDate;
-    }
 }

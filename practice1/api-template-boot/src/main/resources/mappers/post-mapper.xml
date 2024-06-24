@@ -6,10 +6,11 @@
     <select id="selectPost" resultType="PostDto">
         SELECT *
         FROM post
-        WHERE user_id = 2
+        WHERE user_id = #{user_id}
 <!--        AND DATE(post_date) = #{post_date}-->
     </select>
 
+    <!-- 글 작성하기 -->
     <insert id="insertPost" parameterType="PostDto">
         INSERT INTO post
             (user_id, post_writer, title, sub_title, content)
@@ -20,5 +21,11 @@
                 #{title}, #{sub_title}, #{content}
             )
     </insert>
+
+    <!-- 해당하는 본인 포스트 한 개 삭제하기 -->
+    <delete id="deletePost" parameterType="PostDto">
+        DELETE FROM post
+        WHERE post_id = #{post_id} AND user_id = #{user_id}
+    </delete>
 
 </mapper>
