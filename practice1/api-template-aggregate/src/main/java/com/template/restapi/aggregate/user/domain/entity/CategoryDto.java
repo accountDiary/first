@@ -17,6 +17,6 @@ import org.apache.ibatis.type.Alias;
 @NoArgsConstructor
 @Alias("CategoryDto")
 public class CategoryDto {
-    private Integer category_id;
+    private int category_id;
     private String category_name;
 }

@@ -23,10 +23,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("CommentDto")
 public class CommentDto {
-    private Integer comment_id;
-    private Integer post_id;
-    private Integer user_id;
+    private int comment_id;
+    private int post_id;
+    private int user_id;
     private String comment_content;
     private String comment_writer;
-    private Date comment_date;
+    private String comment_date;
 }

@@ -26,11 +26,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("PostDto")
 public class PostDto {
-    private Integer post_id;
-    private Integer user_id;
+    private int post_id;
+    private int user_id;
     private String post_writer;
-    private Date post_date;
-    private Date post_modify;
+    private String post_date;
+    private String post_modify;
     private String title;
     private String sub_title;
     private String content;

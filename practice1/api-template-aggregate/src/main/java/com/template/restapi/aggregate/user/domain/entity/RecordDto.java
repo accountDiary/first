@@ -25,12 +25,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("RecordDto")
 public class RecordDto {
-    private Integer record_id;
-    private Integer user_id;
-    private Integer payment_id;
-    private Integer category_id;
+    private int record_id;
+    private int user_id;
+    private int payment_id;
+    private int category_id;
     private int record_amount;
     private String record_details;
     private String record_memo;
-    private Date record_date;
+    private String record_date;
 }

@@ -21,8 +21,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("FileDto")
 public class FileDto {
-    private Integer file_id;
-    private Integer post_id;
+    private int file_id;
+    private int post_id;
     private String file_board;
-    private Date file_regDate;
+    private String file_regDate;
 }

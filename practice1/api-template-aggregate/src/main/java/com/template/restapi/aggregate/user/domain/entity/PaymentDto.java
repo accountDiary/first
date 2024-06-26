@@ -18,7 +18,7 @@ import org.apache.ibatis.type.Alias;
 @NoArgsConstructor
 @Alias("PaymentDto")
 public class PaymentDto {
-    private Integer payment_id;
+    private int payment_id;
     private String payment_name;
     private String payment_type;
 }
