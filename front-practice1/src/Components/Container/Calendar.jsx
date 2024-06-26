@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import '../Css/Calendar.css'
+import '../../Css/Calendar.css'
 
 function Calendar() {
     return(
@@ -11,6 +11,10 @@ function Calendar() {
             <FullCalendar 
                 defaultView="dayGridMonth" 
                 plugins={[ dayGridPlugin, timeGridPlugin, interactionPlugin ]}
+                events={[
+                    {title : '다이어리 1', date: '2024-06-25'},
+                    {title : '가계부 1', date: '2024-06-25'}
+                ]}
                 height={"85vh"}
             />
         </div>
