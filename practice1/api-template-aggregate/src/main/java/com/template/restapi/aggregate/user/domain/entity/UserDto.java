@@ -27,7 +27,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("UserDto")
 public class UserDto {
-    private int user_id;
+    private int user_id;    //int로 변환 기본, 참조자료형 알 수 있겠끔 바꾸기
     private String user_email;
     private String user_pwd;
     private String user_name;
@@ -35,8 +35,11 @@ public class UserDto {
     private String user_nickname;
     private String user_phone;
     private String user_addr;
-    private Date user_regDate; /// string으로 바꾸기
+    private String user_regDate;  //String으로 변환해서 넘기는 게 나음 포맷 지정해서
     private char user_status;
+
+
+    //어노테이션 있으면 게터세터 안 써도 됨
 }
 
 

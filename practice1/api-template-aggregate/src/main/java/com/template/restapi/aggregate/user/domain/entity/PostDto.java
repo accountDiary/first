@@ -26,85 +26,13 @@ import java.util.Date;
 @NoArgsConstructor
 @Alias("PostDto")
 public class PostDto {
-    private Integer post_id;
-    private Integer user_id;
+    private int post_id;
+    private int user_id;
     private String post_writer;
-    private Date post_date;
-    private Date post_modify;
+    private String post_date;
+    private String post_modify;
     private String title;
     private String sub_title;
     private String content;
     private int view_cnt;
-
-    public Integer getPost_id() {
-        return post_id;
-    }
-
-    public void setPost_id(Integer post_id) {
-        this.post_id = post_id;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
-
-    public String getPost_writer() {
-        return post_writer;
-    }
-
-    public void setPost_writer(String post_writer) {
-        this.post_writer = post_writer;
-    }
-
-    public Date getPost_date() {
-        return post_date;
-    }
-
-    public void setPost_date(Date post_date) {
-        this.post_date = post_date;
-    }
-
-    public Date getPost_modify() {
-        return post_modify;
-    }
-
-    public void setPost_modify(Date post_modify) {
-        this.post_modify = post_modify;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSub_title() {
-        return sub_title;
-    }
-
-    public void setSub_title(String sub_title) {
-        this.sub_title = sub_title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getView_cnt() {
-        return view_cnt;
-    }
-
-    public void setView_cnt(int view_cnt) {
-        this.view_cnt = view_cnt;
-    }
 }
