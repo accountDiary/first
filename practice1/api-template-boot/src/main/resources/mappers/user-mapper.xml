@@ -7,4 +7,12 @@
     </select>
 
 
+    <insert id="insertUser" parameterType="UserDto">
+        INSERT INTO user_info
+                    (user_email, user_pwd, user_name, user_nickname,
+                                user_phone, user_addr, user_regDate)
+        VALUES (#{email}, #{password}, #{name}, #{nickname},
+                #{tel}, #{address}, DATE_FORMAT(NOW(), '%Y-%m-%d'))
+    </insert>
+
 </mapper>

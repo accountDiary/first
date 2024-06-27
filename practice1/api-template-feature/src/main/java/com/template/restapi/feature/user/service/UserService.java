@@ -25,8 +25,6 @@ public class UserService {
         return userLogic.findUserList();
     }
 
-    public List<UserDto> findUserList2() {
-        return userLogic.findUserList2();
-    }
+    public UserDto saveUser() { return userLogic.saveUser(); }
 
 }

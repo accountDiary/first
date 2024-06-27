@@ -1,4 +1,4 @@
-package com.template.restapi.feature.user.service;
+package com.template.restapi.feature.post.service;
 
 
 import com.template.restapi.aggregate.user.domain.entity.PostDto;

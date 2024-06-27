@@ -1,7 +1,7 @@
-package com.template.restapi.endpoint.user;
+package com.template.restapi.endpoint.post;
 
 import com.template.restapi.aggregate.user.domain.entity.PostDto;
-import com.template.restapi.feature.user.service.PostService;
+import com.template.restapi.feature.post.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

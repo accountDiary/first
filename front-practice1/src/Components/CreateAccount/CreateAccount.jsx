@@ -1,100 +1,137 @@
 import React, { useState, useEffect } from "react";
 import WriteId from "./WriteId";
+import Address from "./Address";
 
 function CreateAccount() {
 
-    const [inputValue, setInputValue] = useState("");
+
     const [email, setEmail] = useState("");
     const [domain, setDomain] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
     const [nickname, setNickname] = useState("");
-    const [address, setAddress] = useState("");
     const [tel, setTel] = useState("");
-
+    const [zipcode, setZipCode] = useState("");
+    const [detailAddress, setDetailAddress] = useState("");
+    const [extraAddress, setExtraAddress] = useState("");
 
     useEffect(() => {
-        if (inputValue.length === 10) {
-            setInputValue(inputValue.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
+        if (tel.length === 10) {
+            setTel(tel.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3"));
         }
-        if (inputValue.length === 13) {
-            setInputValue(
-                inputValue.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
+        if (tel.length === 13) {
+            setTel(
+                tel.replace(/-/g, "").replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3")
             );
         }
-    }, [inputValue]);
+    }, [tel]);
 
     const handleChange = (event) => {
         const regex = /^[0-9\b -]{0,13}$/;
         if (regex.test(event.target.value)) {
-            setInputValue(event.target.value);
+            setTel(event.target.value);
         }
     };
 
     const handleSubmit = (event) => {
-        
+        event.preventDefault();
+        const formData = {
+            email: `${email}@${domain}`,
+            password: password,
+            name: name,
+            nickname: nickname,
+            tel: tel,
+            address: `${zipcode}, ${detailAddress}, ${extraAddress}`
+        }
+        console.log(formData);
+        //백엔드랑 연동하기
     }
 
 
 
     return (
         <>
-            <h2>회원가입</h2>
-            <div>아이디</div>
-            <WriteId />
-            <div>비밀번호</div>
-            <input
-                type="password"
-                required
-                placeholder="비밀번호를 입력하세요"
-            />
+            <form onSubmit={handleSubmit}>
+                <h2>회원가입</h2>
+                <div>
+                    <div>아이디</div>
+                    <WriteId
+                        domain={domain}
+                        inputEmail={setEmail}
+                        inputDomain={setDomain}
+                    />
+                </div>
 
-            <div>비밀번호 확인</div>
-            <input
-                type="password"
-                required
-                placeholder="비밀번호를 확인하세요"
-            />
-            <div>이름</div>
-            <input
-                type="text"
-                required
-                placeholder="이름을 입력하세요"
-            />
-            <div>닉네임</div>
-            <input
-                type="text"
-                required
-                placeholder="닉네임을 입력하세요"
-            />
-            <div>전화번호</div>
-            <input
-                type="text"
-                required
-                placeholder="전화번호를 입력하세요"
-                onChange={handleChange}
-                value={inputValue}
-            />
-            <div>주소</div>
-            <input
-                type="text"
-                required
-                disabled
-            />
-            <button>우편번호 검색</button>
-            <input
-                type="text"
-                required
-                disabled
-            />
-            <input
-                type="text"
-                required
-                placeholder="상세주소를 입력하세요"
-            />
+                <div>
+                    <div>비밀번호</div>
+                    <input
+                        id="password"
+                        type="password"
+                        required
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        placeholder="비밀번호를 입력하세요"
+                    />
+                </div>
 
-            <div>
-                <button>회원가입 하기</button>
-            </div>
+                <div>
+                    <div>비밀번호 확인</div>
+                    <input
+                        id="passwordCofirm"
+                        type="password"
+                        required
+                        placeholder="비밀번호를 확인하세요"
+                    />
+                </div>
+
+                <div>
+                    <div>이름</div>
+                    <input
+                        id="name"
+                        type="text"
+                        required
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                        placeholder="이름을 입력하세요"
+                    />
+                </div>
+
+                <div>
+                    <div>닉네임</div>
+                    <input
+                        id="nickname"
+                        type="text"
+                        required
+                        value={nickname}
+                        onChange={(event) => setNickname(event.target.value)}
+                        placeholder="닉네임을 입력하세요"
+                    />
+                </div>
+
+                <div>
+                    <div>전화번호</div>
+                    <input
+                        id="tel"
+                        type="text"
+                        required
+                        value={tel}
+                        onChange={handleChange}
+                        placeholder="전화번호를 입력하세요"
+                    />
+                </div>
+
+                <div>
+                    <Address
+                        inputZipCode={setZipCode}
+                        inputDetailAddress={setDetailAddress}
+                        inputExtraAddress={setExtraAddress}
+                    />
+                </div>
+
+                <div>
+                    <button type="submit">회원가입 하기</button>
+                </div>
+            </form>
         </>
     );
 }
