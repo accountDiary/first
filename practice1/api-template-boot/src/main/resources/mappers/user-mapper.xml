@@ -6,5 +6,19 @@
         FROM user_info
     </select>
 
+    <!-- 회원 가입 -->
+    <insert id="insertUser" parameterType="UserDto">
+        INSERT INTO user_info
+                    (user_email, user_pwd, user_name, user_nickname,
+                                user_phone, user_addr, user_regDate)
+        VALUES (#{user_email}, #{user_pwd}, #{user_name}, #{user_nickname},
+                #{user_phone}, #{user_addr}, DATE_FORMAT(NOW(), '%Y-%m-%d'))
+    </insert>
+
+    <!-- 이메일 중복 체크를 위한 아이디 조회 쿼리 -->
+    <select id="selectUserEmail" resultType="UserDto">
+        SELECT * FROM user_info
+        WHERE user_email = #{user_email};
+    </select>
 
 </mapper>

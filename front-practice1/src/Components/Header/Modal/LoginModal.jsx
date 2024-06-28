@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 
 const LoginModal = ({ onClose }) => {
 
+    const navigate = useNavigate();
+
     const createAccountPage = () => {
-        onClose(); // 모달 닫기
+        onClose();
+        navigate("/createAccount");
     };
+
     return (
         <Modal
             isOpen={true}
@@ -19,7 +23,8 @@ const LoginModal = ({ onClose }) => {
             <input type="text" placeholder="아이디" />
             <input type="password" placeholder="비밀번호" />
             <button onClick={onClose}>닫기</button>
-            <Link to="/createAccount" onClick={createAccountPage}>회원가입</Link>
+
+            <button onClick={createAccountPage}>회원가입</button>
         </Modal>
     );
 };
