@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface UserRepository {
     List<UserDto> selectUserInfo();
-    UserDto insertUser();
+    int insertUser(UserDto userDto);
 }

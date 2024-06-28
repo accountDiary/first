@@ -19,7 +19,7 @@ public class UserLogic {
         return userStore.findUserInfo();
     }
 
-    public UserDto saveUser() {
-        return userStore.insertUser();
+    public UserDto saveUser(UserDto userDto) {
+        return userStore.insertUser(userDto);
     }
 }

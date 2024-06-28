@@ -1,12 +1,10 @@
-package com.template.restapi.aggregate.user.domain.entity;
+package com.template.restapi.aggregate.record.domain.entity;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
-
-import java.util.Date;
 
 /*
 *   record_id       가계부번호

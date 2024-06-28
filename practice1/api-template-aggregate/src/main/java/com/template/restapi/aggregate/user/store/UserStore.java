@@ -22,9 +22,10 @@ public class UserStore {
                 .selectUserInfo();
     }
 
-    public UserDto insertUser() {
-        return sqlSessionTemplate
+    public UserDto insertUser(UserDto userDto) {
+        sqlSessionTemplate
                 .getMapper(UserRepository.class)
-                .insertUser();
+                .insertUser(userDto);
+        return userDto;
     }
 }

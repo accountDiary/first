@@ -1,4 +1,4 @@
-package com.template.restapi.aggregate.user.domain.entity;
+package com.template.restapi.aggregate.category.domain.entity;
 
 import lombok.Data;
 import lombok.Getter;

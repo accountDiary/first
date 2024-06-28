@@ -1,7 +1,7 @@
-package com.template.restapi.aggregate.user.store;
+package com.template.restapi.aggregate.post.store;
 
-import com.template.restapi.aggregate.user.domain.entity.PostDto;
-import com.template.restapi.aggregate.user.store.repository.PostRepository;
+import com.template.restapi.aggregate.post.domain.entity.PostDto;
+import com.template.restapi.aggregate.post.store.repository.PostRepository;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 

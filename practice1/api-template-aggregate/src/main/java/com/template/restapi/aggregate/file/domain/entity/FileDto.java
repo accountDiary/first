@@ -1,12 +1,10 @@
-package com.template.restapi.aggregate.user.domain.entity;
+package com.template.restapi.aggregate.file.domain.entity;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.ibatis.type.Alias;
-
-import java.util.Date;
 
 /*
 *   file_id         파일 아이디

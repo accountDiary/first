@@ -1,8 +1,8 @@
 package com.template.restapi.feature.post.service;
 
 
-import com.template.restapi.aggregate.user.domain.entity.PostDto;
-import com.template.restapi.aggregate.user.domain.logic.PostLogic;
+import com.template.restapi.aggregate.post.domain.entity.PostDto;
+import com.template.restapi.aggregate.post.domain.logic.PostLogic;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

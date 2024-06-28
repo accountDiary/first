@@ -1,6 +1,6 @@
 package com.template.restapi.endpoint.user;
 
-import com.template.restapi.aggregate.user.domain.entity.PostDto;
+import com.template.restapi.aggregate.post.domain.entity.PostDto;
 import com.template.restapi.aggregate.user.domain.entity.UserDto;
 import com.template.restapi.endpoint.user.request.UserQueryRequest;
 import com.template.restapi.feature.post.service.PostService;
@@ -49,9 +49,9 @@ public class UserRestController {
     }
 
     @PostMapping("/saveUser")
-    public ResponseEntity<UserDto> newUser(@RequestBody UserDto userDto) {
-        
-        return ;
+    public ResponseEntity<UserDto> newUser(@RequestBody Map<String, Object> formData) {
+        UserDto savedUser = userService.saveUser(formData);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
 }
