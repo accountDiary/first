@@ -41,3 +41,5 @@ public class UserDto {
 
     //어노테이션 있으면 게터세터 안 써도 됨
 }
+
+
