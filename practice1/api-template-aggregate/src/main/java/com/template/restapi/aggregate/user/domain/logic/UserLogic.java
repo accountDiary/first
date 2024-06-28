@@ -18,7 +18,12 @@ public class UserLogic {
     public List<UserDto> findUserList() {
         return userStore.findUserInfo();
     }
-    public List<UserDto> findUserList2() {
-        return userStore.findUserInfo2();
+
+    public UserDto saveUser(UserDto userDto) {
+        return userStore.insertUser(userDto);
+    }
+
+    public UserDto isEmailExist(String email) {
+        return userStore.selectUserEmail(email);
     }
 }
