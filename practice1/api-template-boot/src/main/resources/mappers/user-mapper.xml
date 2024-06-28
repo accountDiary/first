@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.template.restapi.aggregate.user.store.repository.UserRepository">
-    <select id="selectUserInfo" resultType="com.template.restapi.aggregate.user.domain.entity.UserDto">
+    <select id="selectUserInfo" resultType="UserDto">
         SELECT *
         FROM user_info
     </select>
