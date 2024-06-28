@@ -22,9 +22,16 @@ public class UserStore {
                 .selectUserInfo();
     }
 
-    public List<UserDto> findUserInfo2() {
+    public UserDto insertUser(UserDto userDto) {
+        sqlSessionTemplate
+                .getMapper(UserRepository.class)
+                .insertUser(userDto);
+        return userDto;
+    }
+
+    public UserDto selectUserEmail(String email) {
         return sqlSessionTemplate
                 .getMapper(UserRepository.class)
-                .selectUserInfo2();
+                .selectUserEmail(email);
     }
 }

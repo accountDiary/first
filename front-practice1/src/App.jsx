@@ -7,6 +7,7 @@ import Footer from "./Components/Footer/Footer.jsx";
 import CreateAccount from "./Components/CreateAccount/CreateAccount.jsx";
 
 function App() {
+
     return (
         <BrowserRouter>
             <div className="App">
@@ -14,10 +15,9 @@ function App() {
 
                 <Routes>
                     <Route path="/createAccount" element={<CreateAccount />} />
-
                     <Route path="/" element={<FullCalendar1 />} />
-
                 </Routes>
+                
                 <Footer />
             </div>
         </BrowserRouter>
