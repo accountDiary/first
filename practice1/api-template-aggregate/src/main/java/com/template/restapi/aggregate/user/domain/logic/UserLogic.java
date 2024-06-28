@@ -22,4 +22,8 @@ public class UserLogic {
     public UserDto saveUser(UserDto userDto) {
         return userStore.insertUser(userDto);
     }
+
+    public UserDto isEmailExist(String email) {
+        return userStore.selectUserEmail(email);
+    }
 }

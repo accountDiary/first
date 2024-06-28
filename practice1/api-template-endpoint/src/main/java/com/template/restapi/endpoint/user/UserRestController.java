@@ -54,4 +54,15 @@ public class UserRestController {
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
+    @PostMapping("/checkEmail")
+    public ResponseEntity<String> checkEmail(@RequestBody Map<String, Object> formData) {
+        String email = (String) formData.get("email");
+
+        if(userService.isEmailExist(email)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("이메일이 이미 존재합니다");
+        } else {
+            return ResponseEntity.ok("사용 가능한 이메일입니다.");
+        }
+    }
+
 }

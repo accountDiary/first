@@ -43,6 +43,11 @@ public class UserService {
 
     }
 
+    public boolean isEmailExist(String email) {
+        UserDto userDto= userLogic.isEmailExist(email);
+        return userDto != null;
+    }
+
 
 
 }

@@ -17,6 +17,8 @@ function CreateAccount() {
     const [zipcode, setZipCode] = useState("");
     const [detailAddress, setDetailAddress] = useState("");
     const [extraAddress, setExtraAddress] = useState("");
+    const [isCheckEmail, setIsCheckEmail] = useState("");
+    const [checkMessage, setCheckMessage] = useState("");
 
     useEffect(() => {
         if (tel.length === 10) {
@@ -38,15 +40,17 @@ function CreateAccount() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         if (password !== passwordConfirm) {
             alert("비밀번호를 다시 확인해주세요.");
             return;
         }
-        
+        if (!isCheckEmail) {
+            alert("이메일 중복 체크를 해주세요.");
+        }
         const address = (zipcode || detailAddress || extraAddress) ?
-                        `${zipcode}, ${detailAddress}, ${extraAddress}` : null;
-        
+            `${zipcode}, ${detailAddress}, ${extraAddress}` : null;
+
         const formData = {
             email: `${email}@${domain}`,
             password: password,
@@ -60,19 +64,62 @@ function CreateAccount() {
         await axios
             .post("/api/user/saveUser", formData)
             .then((response) => {
-                console.log(response.data)
+                console.log(response.data);
             })
             .catch((error) => {
-                console.error("에러: ", error )
+                console.error("에러: ", error);
             })
 
+    }
+
+    const handleChangeName = (event) => {
+        const regex = /^[가-힣]*$/;
+        const inputValue = event.target.value;
+        const cleanValue = inputValue.replace(/\s/g, "");
+
+        if (regex.test(cleanValue)) {
+            setName(cleanValue);
+        }
+    }
+
+    // 비밀번호 정규식: const regex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+
+    const handleCheckEmail = async () => {
+        console.log("이메일 중복 확인")
+
+        if (!email || !domain) {
+            alert("이메일을 입력해주세요.");
+            return;
+        }
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!regex.test(`${email}@${domain}`)) {
+            alert("이메일은 영문자, 숫자만 기입 가능합니다.")
+            return;
+        }
+
+        const formData = {
+            email: `${email}@${domain}`
+        }
+        await axios
+            .post("/api/user/checkEmail", formData)
+            .then((response) => {
+                console.log(response.data);
+                alert("사용 가능한 이메일입니다.");
+                setIsCheckEmail(true);
+            })
+            .catch((error) => {
+                console.error("에러: ", error);
+                alert("중복된 이메일입니다.");
+                setIsCheckEmail(false);
+            })
     }
 
 
 
     return (
         <>
-                <h2>회원가입</h2>
+            <h2>회원가입</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <div>아이디</div>
@@ -81,6 +128,7 @@ function CreateAccount() {
                         inputEmail={setEmail}
                         inputDomain={setDomain}
                     />
+                    <button type="button" onClick={handleCheckEmail}>이메일 중복 체크</button>
                 </div>
 
                 <div>
@@ -114,7 +162,7 @@ function CreateAccount() {
                         type="text"
                         required
                         value={name}
-                        onChange={(event) => setName(event.target.value)}
+                        onChange={handleChangeName}
                         placeholder="이름을 입력하세요"
                     />
                 </div>

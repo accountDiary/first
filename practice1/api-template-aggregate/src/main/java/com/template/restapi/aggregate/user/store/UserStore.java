@@ -28,4 +28,10 @@ public class UserStore {
                 .insertUser(userDto);
         return userDto;
     }
+
+    public UserDto selectUserEmail(String email) {
+        return sqlSessionTemplate
+                .getMapper(UserRepository.class)
+                .selectUserEmail(email);
+    }
 }
