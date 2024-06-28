@@ -72,8 +72,8 @@ function CreateAccount() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
                 <h2>회원가입</h2>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <div>아이디</div>
                     <WriteId
