@@ -59,7 +59,7 @@ public class UserRestController {
         String email = (String) formData.get("email");
 
         if(userService.isEmailExist(email)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("이메일이 이미 존재합니다");
+            return ResponseEntity.ok("이메일이 이미 존재합니다");
         } else {
             return ResponseEntity.ok("사용 가능한 이메일입니다.");
         }

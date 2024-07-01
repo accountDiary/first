@@ -28,6 +28,7 @@ public class UserService {
         return userLogic.findUserList();
     }
 
+    //유저 생성
     public UserDto saveUser(Map<String, Object> formData) {
 
         UserDto userDto = new UserDto();
@@ -43,8 +44,9 @@ public class UserService {
 
     }
 
+    //이메일 중복 확인
     public boolean isEmailExist(String email) {
-        UserDto userDto= userLogic.isEmailExist(email);
+        UserDto userDto = userLogic.isEmailExist(email);
         return userDto != null;
     }
 

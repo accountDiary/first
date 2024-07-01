@@ -6,7 +6,6 @@ import Address from "./Address";
 
 function CreateAccount() {
 
-
     const [email, setEmail] = useState("");
     const [domain, setDomain] = useState("");
     const [password, setPassword] = useState("");
@@ -18,7 +17,7 @@ function CreateAccount() {
     const [detailAddress, setDetailAddress] = useState("");
     const [extraAddress, setExtraAddress] = useState("");
     const [isCheckEmail, setIsCheckEmail] = useState("");
-    const [checkMessage, setCheckMessage] = useState("");
+    const [isMessage, setIsMessage] = useState("");
 
     useEffect(() => {
         if (tel.length === 10) {
@@ -39,7 +38,6 @@ function CreateAccount() {
     };
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
 
         if (password !== passwordConfirm) {
             alert("비밀번호를 다시 확인해주세요.");
@@ -47,6 +45,7 @@ function CreateAccount() {
         }
         if (!isCheckEmail) {
             alert("이메일 중복 체크를 해주세요.");
+            return;
         }
         const address = (zipcode || detailAddress || extraAddress) ?
             `${zipcode}, ${detailAddress}, ${extraAddress}` : null;
@@ -82,10 +81,20 @@ function CreateAccount() {
         }
     }
 
-    // 비밀번호 정규식: const regex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+    const handleInputPwd = (event) => {
+        setPassword(event.target.value);
+        const regex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+
+        if(!regex.test(event.target.value)) {
+            setIsMessage("비밀번호는 8자리 이상의 영어, 숫자, 특수기호의 조합으로 이루어져야 합니다.");
+        } else {
+            setIsMessage("");
+        }
+
+    }
 
     const handleCheckEmail = async () => {
-        console.log("이메일 중복 확인")
+        console.log("이메일 확인")
 
         if (!email || !domain) {
             alert("이메일을 입력해주세요.");
@@ -94,25 +103,32 @@ function CreateAccount() {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         if (!regex.test(`${email}@${domain}`)) {
-            alert("이메일은 영문자, 숫자만 기입 가능합니다.")
+            alert("이메일은 영문자, 숫자, .(온점), _(언더바)만 기입 가능합니다.")
             return;
         }
 
         const formData = {
             email: `${email}@${domain}`
         }
+
         await axios
             .post("/api/user/checkEmail", formData)
             .then((response) => {
-                console.log(response.data);
-                alert("사용 가능한 이메일입니다.");
-                setIsCheckEmail(true);
+                const message = response.data;
+
+                if (message === "이메일이 이미 존재합니다") {
+                    alert(message);
+                    setIsCheckEmail(false);
+                } else {
+                    alert(message);
+                    setIsCheckEmail(true);
+                }
             })
             .catch((error) => {
                 console.error("에러: ", error);
-                alert("중복된 이메일입니다.");
+                alert("이메일 확인 중 오류가 발생했습니다.");
                 setIsCheckEmail(false);
-            })
+            });
     }
 
 
@@ -120,89 +136,90 @@ function CreateAccount() {
     return (
         <>
             <h2>회원가입</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <div>아이디</div>
-                    <WriteId
-                        domain={domain}
-                        inputEmail={setEmail}
-                        inputDomain={setDomain}
-                    />
-                    <button type="button" onClick={handleCheckEmail}>이메일 중복 체크</button>
-                </div>
+            {/* <form onSubmit={handleSubmit}> */}
+            <div>
+                <div>아이디</div>
+                <WriteId
+                    domain={domain}
+                    inputEmail={setEmail}
+                    inputDomain={setDomain}
+                />
+                <button type="button" onClick={handleCheckEmail}>이메일 중복 체크</button>
+            </div>
 
-                <div>
-                    <div>비밀번호</div>
-                    <input
-                        id="password"
-                        type="password"
-                        required
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        placeholder="비밀번호를 입력하세요"
-                    />
-                </div>
+            <div>
+                <div>비밀번호</div>
+                <input
+                    id="password"
+                    type="password"
+                    required
+                    value={password}
+                    onChange={handleInputPwd}
+                    placeholder="비밀번호를 입력하세요"
+                />
+                {isMessage && <p style={{ color: "red" }}>{isMessage}</p>}
+            </div>
 
-                <div>
-                    <div>비밀번호 확인</div>
-                    <input
-                        id="passwordConfirm"
-                        type="password"
-                        required
-                        value={passwordConfirm}
-                        onChange={(event) => setPasswordConfirm(event.target.value)}
-                        placeholder="비밀번호를 확인하세요"
-                    />
-                </div>
+            <div>
+                <div>비밀번호 확인</div>
+                <input
+                    id="passwordConfirm"
+                    type="password"
+                    required
+                    value={passwordConfirm}
+                    onChange={(event) => setPasswordConfirm(event.target.value)}
+                    placeholder="비밀번호를 확인하세요"
+                />
+            </div>
 
-                <div>
-                    <div>이름</div>
-                    <input
-                        id="name"
-                        type="text"
-                        required
-                        value={name}
-                        onChange={handleChangeName}
-                        placeholder="이름을 입력하세요"
-                    />
-                </div>
+            <div>
+                <div>이름</div>
+                <input
+                    id="name"
+                    type="text"
+                    required
+                    value={name}
+                    onChange={handleChangeName}
+                    placeholder="이름을 입력하세요"
+                />
+            </div>
 
-                <div>
-                    <div>닉네임</div>
-                    <input
-                        id="nickname"
-                        type="text"
-                        required
-                        value={nickname}
-                        onChange={(event) => setNickname(event.target.value)}
-                        placeholder="닉네임을 입력하세요"
-                    />
-                </div>
+            <div>
+                <div>닉네임</div>
+                <input
+                    id="nickname"
+                    type="text"
+                    required
+                    value={nickname}
+                    onChange={(event) => setNickname(event.target.value)}
+                    placeholder="닉네임을 입력하세요"
+                />
+            </div>
 
-                <div>
-                    <div>전화번호</div>
-                    <input
-                        id="tel"
-                        type="text"
-                        required
-                        value={tel}
-                        onChange={handleChange}
-                        placeholder="전화번호를 입력하세요"
-                    />
-                </div>
+            <div>
+                <div>전화번호</div>
+                <input
+                    id="tel"
+                    type="text"
+                    required
+                    value={tel}
+                    onChange={handleChange}
+                    placeholder="전화번호를 입력하세요"
+                />
+            </div>
 
-                <div>
-                    <Address
-                        inputZipCode={setZipCode}
-                        inputDetailAddress={setDetailAddress}
-                        inputExtraAddress={setExtraAddress}
-                    />
-                </div>
+            <div>
+                <Address
+                    inputZipCode={setZipCode}
+                    inputDetailAddress={setDetailAddress}
+                    inputExtraAddress={setExtraAddress}
+                />
+            </div>
 
-                <div>
-                    <button type="submit">회원가입 하기</button>
-                </div>
-            </form>
+            <div>
+                <button type="submit" onClick={handleSubmit}>회원가입 하기</button>
+            </div>
+            {/* </form> */}
         </>
     );
 }

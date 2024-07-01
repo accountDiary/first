@@ -1,16 +1,50 @@
 import React, { useState } from "react";
+import DaumPostcode from "react-daum-postcode";
 
 export default function Address({ inputZipCode, inputDetailAddress, inputExtraAddress }) {
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [zipCode, setZipCode] = useState("");
+    const [detailAddress, setDetailAddress] = useState("");
 
-    function openAddrCode() {
-        console.log("팝업 열림");
-        setIsPopupOpen(true);
+    const completeHandler = (data) => {
+        const { address, zonecode } = data;
+        
+        // 상태 업데이트
+        setZipCode(zonecode);
+        setDetailAddress(address);
+        
+        //부모 컴포넌트로 전달
+        inputZipCode(zonecode);
+        inputDetailAddress(address);
+        
+        setIsOpen(false);
     }
 
-    function closeAddrCode() {
-        setIsPopupOpen(false);
-    }
+    const postCodeStyle = {
+        display: "block",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        width: "400px",
+        height: "500px",
+        padding: "7px",
+        zIndex: 100,
+        border: "1px solid black",
+        backgroundColor: "white",
+    };
+
+    const closeHandler = (state) => {
+        if (state === "FORCE_CLOSE") {
+            setIsOpen(false);
+        } else if (state === "COMPLETE_CLOSE") {
+            setIsOpen(false);
+        }
+    };
+
+    const zipcodeButton = () => {
+        setIsOpen((prevOpneState) => !prevOpneState);
+    };
 
     return (
         <>
@@ -20,16 +54,30 @@ export default function Address({ inputZipCode, inputDetailAddress, inputExtraAd
                 id="zipcode"
                 type="number"
                 required
-                onChange={(event) => inputZipCode(event.target.value)}
+                value={zipCode}
                 disabled
             />
-            <button type="button" onClick={openAddrCode}>우편번호 검색</button>
+            <button type="button" onClick={zipcodeButton}>주소 찾기</button>
+            {isOpen && (
+                <div style={postCodeStyle}>
+                    <button
+                        type="button"
+                        onClick={() => setIsOpen(false)}
+                    >
+                        X
+                    </button>
+                    <DaumPostcode
+                        onComplete={completeHandler}
+                        onClose={closeHandler}
+                    />
+                </div>
+            )}
             <div>기본주소</div>
             <input
                 id="detailAddress"
                 type="text"
                 required
-                onChange={(event) => inputDetailAddress(event.target.value)}
+                value={detailAddress}
                 disabled
             />
             <div>상세주소</div>
