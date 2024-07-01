@@ -16,7 +16,7 @@ function CreateAccount() {
     const [zipcode, setZipCode] = useState("");
     const [detailAddress, setDetailAddress] = useState("");
     const [extraAddress, setExtraAddress] = useState("");
-    const [isCheckEmail, setIsCheckEmail] = useState("");
+    const [isCheckEmail, setIsCheckEmail] = useState(false);
     const [isMessage, setIsMessage] = useState("");
 
     useEffect(() => {
@@ -39,6 +39,18 @@ function CreateAccount() {
 
     const handleSubmit = async (event) => {
 
+        if (!name.trim()) {
+            alert("이름을 입력해주세요.");
+            return;
+        }
+        if (!nickname.trim()) {
+            alert("닉네임을 입력해주세요");
+            return;
+        }
+        if (!tel.trim()) {
+            alert("전화번호를 입력해주세요.");
+            return;
+        }
         if (password !== passwordConfirm) {
             alert("비밀번호를 다시 확인해주세요.");
             return;
@@ -83,10 +95,10 @@ function CreateAccount() {
 
     const handleInputPwd = (event) => {
         setPassword(event.target.value);
-        const regex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+        const regex = /^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,10}$/;
 
-        if(!regex.test(event.target.value)) {
-            setIsMessage("비밀번호는 8자리 이상의 영어, 숫자, 특수기호의 조합으로 이루어져야 합니다.");
+        if (!regex.test(event.target.value)) {
+            setIsMessage("비밀번호는 8~10 자리의 영어, 숫자, 특수기호의 조합으로 이루어져야 합니다.");
         } else {
             setIsMessage("");
         }
@@ -103,7 +115,7 @@ function CreateAccount() {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
         if (!regex.test(`${email}@${domain}`)) {
-            alert("이메일은 영문자, 숫자, .(온점), _(언더바)만 기입 가능합니다.")
+            alert("이메일은 공백 제외, 영문자, 숫자, .(온점), _(언더바)만 기입 가능합니다.")
             return;
         }
 
@@ -136,7 +148,6 @@ function CreateAccount() {
     return (
         <>
             <h2>회원가입</h2>
-            {/* <form onSubmit={handleSubmit}> */}
             <div>
                 <div>아이디</div>
                 <WriteId
@@ -144,7 +155,12 @@ function CreateAccount() {
                     inputEmail={setEmail}
                     inputDomain={setDomain}
                 />
-                <button type="button" onClick={handleCheckEmail}>이메일 중복 체크</button>
+                <button
+                    type="button"
+                    onClick={handleCheckEmail}
+                >
+                    이메일 중복 확인
+                </button>
             </div>
 
             <div>
@@ -152,7 +168,6 @@ function CreateAccount() {
                 <input
                     id="password"
                     type="password"
-                    required
                     value={password}
                     onChange={handleInputPwd}
                     placeholder="비밀번호를 입력하세요"
@@ -165,7 +180,6 @@ function CreateAccount() {
                 <input
                     id="passwordConfirm"
                     type="password"
-                    required
                     value={passwordConfirm}
                     onChange={(event) => setPasswordConfirm(event.target.value)}
                     placeholder="비밀번호를 확인하세요"
@@ -177,7 +191,6 @@ function CreateAccount() {
                 <input
                     id="name"
                     type="text"
-                    required
                     value={name}
                     onChange={handleChangeName}
                     placeholder="이름을 입력하세요"
@@ -189,7 +202,6 @@ function CreateAccount() {
                 <input
                     id="nickname"
                     type="text"
-                    required
                     value={nickname}
                     onChange={(event) => setNickname(event.target.value)}
                     placeholder="닉네임을 입력하세요"
@@ -201,7 +213,6 @@ function CreateAccount() {
                 <input
                     id="tel"
                     type="text"
-                    required
                     value={tel}
                     onChange={handleChange}
                     placeholder="전화번호를 입력하세요"
@@ -217,9 +228,8 @@ function CreateAccount() {
             </div>
 
             <div>
-                <button type="submit" onClick={handleSubmit}>회원가입 하기</button>
+                <button type="button" onClick={handleSubmit}>회원가입 하기</button>
             </div>
-            {/* </form> */}
         </>
     );
 }
