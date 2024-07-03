@@ -36,7 +36,6 @@ header {
   width: 100%;
 }
 
-
 .App-link {
   color: #61dafb;
 }
@@ -72,7 +71,7 @@ header {
   border-radius: 6px;
   background-color: transparent;
   color: #80dbf4;
-  font-family: 'Indie Flower', serif;
+  font-family: "Indie Flower", serif;
   font-size: 2rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -87,7 +86,6 @@ header {
   background-color: #5c60e6;
   color: #ebe7ef;
 }
-
 
 menu {
   display: flex;
@@ -121,5 +119,3 @@ footer {
   bottom: 0;
   text-align: center;
 }
-
-
