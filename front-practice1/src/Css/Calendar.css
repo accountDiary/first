@@ -12,14 +12,6 @@
     color: rgb(76, 76, 224);
 }
 
-.calendar-container {
-    width: 600px;
-    height: 650px;
-    border: 2px solid black;
-    margin-left: 10vh;
-    overflow: hidden;
-  }
-
 .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
     height: 10px !important;
 }

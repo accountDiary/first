@@ -37,8 +37,12 @@ function CreateAccount() {
         }
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async () => {
 
+        if (!isCheckEmail) {
+            alert("이메일 중복 체크를 해주세요.");
+            return;
+        }
         if (!name.trim()) {
             alert("이름을 입력해주세요.");
             return;
@@ -53,10 +57,6 @@ function CreateAccount() {
         }
         if (password !== passwordConfirm) {
             alert("비밀번호를 다시 확인해주세요.");
-            return;
-        }
-        if (!isCheckEmail) {
-            alert("이메일 중복 체크를 해주세요.");
             return;
         }
         const address = (zipcode || detailAddress || extraAddress) ?

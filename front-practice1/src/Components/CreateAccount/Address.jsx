@@ -43,7 +43,7 @@ export default function Address({ inputZipCode, inputDetailAddress, inputExtraAd
     };
 
     const zipcodeButton = () => {
-        setIsOpen((prevOpneState) => !prevOpneState);
+        setIsOpen((prevOpenState) => !prevOpenState);
     };
 
     return (
@@ -53,7 +53,6 @@ export default function Address({ inputZipCode, inputDetailAddress, inputExtraAd
             <input
                 id="zipcode"
                 type="number"
-                required
                 value={zipCode}
                 disabled
             />
@@ -76,7 +75,6 @@ export default function Address({ inputZipCode, inputDetailAddress, inputExtraAd
             <input
                 id="detailAddress"
                 type="text"
-                required
                 value={detailAddress}
                 disabled
             />

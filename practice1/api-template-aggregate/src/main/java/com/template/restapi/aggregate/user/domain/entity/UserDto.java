@@ -38,7 +38,6 @@ public class UserDto {
     private String user_regDate;  //String으로 변환해서 넘기는 게 나음 포맷 지정해서
     private char user_status;
 
-
     //어노테이션 있으면 게터세터 안 써도 됨
 }
 
