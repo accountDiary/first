@@ -14,4 +14,7 @@ import org.apache.ibatis.type.Alias;
 public class RecordCategoryDto {
     private String record_category_id;
     private String record_category_type;
+
+    private int category_id;
+    private String category_name;
 }

@@ -1,6 +1,7 @@
 import React from "react";
-import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import "./App.css";
 import Header from "./Components/Header/Header.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import FullCalendar from "./Components/Container/Calendar.jsx";
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
         element: <CreateAccount />,
     },
     {
-        path: "/accountBook",
+        path: "/writeAccountBook",
         element: <AccountBook />,
     },
 

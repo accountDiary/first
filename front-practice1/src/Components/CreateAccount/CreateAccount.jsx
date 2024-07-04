@@ -3,6 +3,7 @@ import axios from "axios";
 
 import WriteId from "./WriteId";
 import Address from "./Address";
+import { getCheckEmail, getSaveUser } from "../../Api/api.user";
 
 function CreateAccount() {
 
@@ -70,16 +71,16 @@ function CreateAccount() {
             tel: tel,
             address: address
         }
-        console.log(formData);
+        
         //백엔드랑 연동하기
-        await axios
-            .post("/api/user/saveUser", formData)
-            .then((response) => {
-                console.log(response.data);
+        getSaveUser(formData)
+            .then(response => {
+                console.log(response);
+                alert("회원가입이 완료되었습니다.");
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error("에러: ", error);
-            })
+            });
 
     }
 
@@ -123,11 +124,9 @@ function CreateAccount() {
             email: `${email}@${domain}`
         }
 
-        await axios
-            .post("/api/user/checkEmail", formData)
-            .then((response) => {
-                const message = response.data;
-
+        //백엔드랑 연동하기
+        getCheckEmail(formData)
+            .then(message => {
                 if (message === "이메일이 이미 존재합니다") {
                     alert(message);
                     setIsCheckEmail(false);
@@ -136,11 +135,12 @@ function CreateAccount() {
                     setIsCheckEmail(true);
                 }
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error("에러: ", error);
                 alert("이메일 확인 중 오류가 발생했습니다.");
                 setIsCheckEmail(false);
             });
+
     }
 
 
