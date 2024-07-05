@@ -20,6 +20,17 @@
     margin-bottom: 10px;
 }
 
+textarea {
+    width: 100%;
+    height: 5.25em;
+    border-radius: 5px;
+    resize: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
 /* .daily-account {
 
 } */

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "../Container/Calendar";
 import AccountInputTable from "./AccountInputTable";
-import { getCategories, getIncomeCategories, getSpendingCategories } from "../../Api/api.categories";
+import { getCategories } from "../../Api/api.categories.js";
 import "../../Css/AccountBook.css";
 
 export default function AccountBook() {
@@ -30,9 +30,10 @@ export default function AccountBook() {
                 <div className="daily-account">
                     오늘의 소비 총평
                     <div>
-                        <textarea></textarea>
+                        <textarea placeholder="내용을 입력해주세요."></textarea>
                     </div>
                 </div>
+                <button type="button">등록하기</button>
             </div>
         </div>
     );

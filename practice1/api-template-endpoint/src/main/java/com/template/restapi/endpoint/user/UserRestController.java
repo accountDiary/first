@@ -20,7 +20,6 @@ public class UserRestController {
         this.userService = userService;
     }
 
-
     /*
     * Controller Example
     * */

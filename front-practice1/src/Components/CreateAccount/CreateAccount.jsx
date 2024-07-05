@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import WriteId from "./WriteId";
 import Address from "./Address";
-import { getCheckEmail, getSaveUser } from "../../Api/api.user";
+import { getCheckEmail, getSaveUser } from "../../Api/api.user.js";
 
 function CreateAccount() {
 

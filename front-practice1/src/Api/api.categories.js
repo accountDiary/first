@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 // 수입 또는 지출 선택
 export const getCategories = async () => {
     return await axios
@@ -17,7 +16,7 @@ export const getCategories = async () => {
             });
 };
 
-// 지출 카테고리
+// 지출 카테고리 불러오기
 export const getSpendingCategories = async () => {
     return await axios
         .get("/api/categories/spending")
@@ -32,7 +31,7 @@ export const getSpendingCategories = async () => {
         });
 };
 
-// 수입 카테고리
+// 수입 카테고리 불러오기
 export const getIncomeCategories = async () => {
     return await axios
         .get("/api/categories/income")
