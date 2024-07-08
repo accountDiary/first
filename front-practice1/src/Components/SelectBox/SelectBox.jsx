@@ -1,19 +1,18 @@
 import React from "react"
 
-export default function SelectBox({ options, onChange }) {
-    const handleOnChange = (event) => {
-        if (onChange) {
-            onChange(event);
-        }
-    }
+export default function SelectBox({ id, name, options, onChange }) {
 
     return (
         <>
-            <select onChange={onChange}>
+            <select
+                id={id}
+                name={name}
+                onChange={onChange}
+            >
                 <option value="">선택</option>
-                {options.map((option) => (
+                {options.map((option, index) => (
                     <option
-                        key={option.value}
+                        key={index}
                         value={option.value}
                     >
                         {option.label}

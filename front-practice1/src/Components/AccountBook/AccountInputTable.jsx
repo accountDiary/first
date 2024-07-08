@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-
 import SelectBox from "../SelectBox/SelectBox";
 import { getIncomeCategories, getSpendingCategories } from "../../Api/api.categories.js";
 
@@ -60,12 +59,15 @@ export default function AccountTable({ categories }) {
     //행 추가
     const addRow = () => {
         //새로운 행 추가해서 행 상태 업데이트
-        setRows([...rows, { category: "", subCategory: "", amount: "", remark: "", subCategories: [] }]);
+        setRows([...rows, { category: "", subCategory: "", recordAmount: "", recordDetails: "", subCategories: [] }]);
     }
 
     //행 삭제
-    const deleteRow = () => {
-
+    const deleteRow = (index) => {
+        //_(언더바): 해당 변수 값이 사용되지 않음을 나타낼 때 js에서 관습적으로 사용되는 변수명
+        //i: 배열의 인덱스
+        //인덱스 i가 해당 함수에 전달된 index와 같지 않은 요소들만 포함하는 새 배열 반환
+        setRows(rows.filter((_, i) => i !== index));
     }
 
     return (
@@ -92,18 +94,24 @@ export default function AccountTable({ categories }) {
                         <tr key={index}>
                             <td>
                                 <SelectBox
+                                    id={`category${index}`}
+                                    name={`category${index}`}
                                     options={categories}
                                     onChange={(event) => handleCategoryChange(event, index)}
                                 />
                             </td>
                             <td>
                                 <SelectBox
+                                    id={`subCategory${index}`}
+                                    name={`subCategory${index}`}
                                     options={row.subCategories}
                                     onChange={(event) => handleSubCategoryChange(event, index)}
                                 />
                             </td>
                             <td>
                                 <input
+                                    id={`recordAmount${index}`}
+                                    name={`recordAmount${index}`}
                                     type="number"
                                     value={row.recordAmount}
                                     onChange={(event) => handleInputChange(event, index, "recordAmount")}
@@ -111,6 +119,8 @@ export default function AccountTable({ categories }) {
                             </td>
                             <td>
                                 <input
+                                    id={`recordDetails${index}`}
+                                    name={`recordDetails${index}`}
                                     type="text"
                                     value={row.recordDetails}
                                     onChange={(event) => handleInputChange(event, index, "recordDetails")}
@@ -119,7 +129,7 @@ export default function AccountTable({ categories }) {
                             <td>
                                 <button
                                     type="button"
-                                    onClick={deleteRow}
+                                    onClick={() => deleteRow(index)}
                                 >
                                     <FontAwesomeIcon icon={faXmark} />
                                 </button>

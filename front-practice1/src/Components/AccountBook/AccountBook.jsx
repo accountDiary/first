@@ -30,7 +30,7 @@ export default function AccountBook() {
                 <div className="daily-account">
                     오늘의 소비 총평
                     <div>
-                        <textarea placeholder="내용을 입력해주세요."></textarea>
+                        <textarea id="todaysReview" placeholder="내용을 입력해주세요."></textarea>
                     </div>
                 </div>
                 <button type="button">등록하기</button>
