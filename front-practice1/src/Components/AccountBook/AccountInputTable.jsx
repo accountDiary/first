@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -6,10 +6,7 @@ import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SelectBox from "../SelectBox/SelectBox";
 import { getIncomeCategories, getSpendingCategories } from "../../Api/api.categories.js";
 
-export default function AccountTable({ categories }) {
-    const [rows, setRows] = useState([
-        { category: "", subCategory: "", recordAmount: "", recordDetails: "", subCategories: [] }
-    ]);
+export default function AccountTable({ categories, paymentCategories, rows, setRows }) {
 
     const handleCategoryChange = (event, index) => {
         //선택한 카테고리 값 가져옴
@@ -50,6 +47,14 @@ export default function AccountTable({ categories }) {
         console.log("서브 카테고리:", subSelected);
     }
 
+    const handlePaymentTypeChange = (event, index) => {
+        const paymentSelected = event.target.value;
+        const newRows = [...rows];
+
+        newRows[index].paymentType = paymentSelected;
+
+    }
+
     const handleInputChange = (event, index, field) => {
         const newRows = [...rows];
         newRows[index][field] = event.target.value;
@@ -59,7 +64,7 @@ export default function AccountTable({ categories }) {
     //행 추가
     const addRow = () => {
         //새로운 행 추가해서 행 상태 업데이트
-        setRows([...rows, { category: "", subCategory: "", recordAmount: "", recordDetails: "", subCategories: [] }]);
+        setRows([...rows, { category: "", subCategory: "", paymentType:"", recordAmount: "", recordDetails: "", subCategories: [] }]);
     }
 
     //행 삭제
@@ -77,6 +82,7 @@ export default function AccountTable({ categories }) {
                     <tr>
                         <th>수입 / 지출</th>
                         <th>내역</th>
+                        <th>방식</th>
                         <th>금액</th>
                         <th>비고</th>
                         <th>
@@ -106,6 +112,14 @@ export default function AccountTable({ categories }) {
                                     name={`subCategory${index}`}
                                     options={row.subCategories}
                                     onChange={(event) => handleSubCategoryChange(event, index)}
+                                />
+                            </td>
+                            <td>
+                                <SelectBox
+                                    id={`paymentType${index}`}
+                                    name={`paymentType${index}`}
+                                    options={paymentCategories}
+                                    onChange={(event) => handlePaymentTypeChange(event, index)}
                                 />
                             </td>
                             <td>

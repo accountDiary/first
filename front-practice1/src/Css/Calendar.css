@@ -12,10 +12,6 @@
     color: rgb(76, 76, 224);
 }
 
-.fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
-    height: 10px !important;
-}
-
 /*
 for css vars only.
 these values are automatically known in all stylesheets.

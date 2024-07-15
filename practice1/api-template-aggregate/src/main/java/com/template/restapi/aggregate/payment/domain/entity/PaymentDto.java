@@ -19,6 +19,5 @@ import org.apache.ibatis.type.Alias;
 @Alias("PaymentDto")
 public class PaymentDto {
     private int payment_id;
-    private String payment_name;
     private String payment_type;
 }

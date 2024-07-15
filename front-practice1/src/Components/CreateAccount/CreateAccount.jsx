@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import WriteId from "./WriteId";
 import Address from "./Address";
 import { getCheckEmail, getSaveUser } from "../../Api/api.user.js";
+import "../../Css/CreateAccount.css";
 
 function CreateAccount() {
 
@@ -70,7 +71,7 @@ function CreateAccount() {
             tel: tel,
             address: address
         }
-        
+
         //백엔드랑 연동하기
         getSaveUser(formData)
             .then(response => {
@@ -106,7 +107,6 @@ function CreateAccount() {
     }
 
     const handleCheckEmail = async () => {
-        console.log("이메일 확인")
 
         if (!email || !domain) {
             alert("이메일을 입력해주세요.");
@@ -142,95 +142,98 @@ function CreateAccount() {
 
     }
 
-
-
     return (
         <>
-            <h2>회원가입</h2>
-            <div>
-                <div>아이디</div>
-                <WriteId
-                    domain={domain}
-                    inputEmail={setEmail}
-                    inputDomain={setDomain}
-                />
-                <button
-                    type="button"
-                    onClick={handleCheckEmail}
-                >
-                    이메일 중복 확인
-                </button>
-            </div>
+            <div className="signup-container">
+                <div className="form-wrapper">
+                    <h2>회원가입</h2>
+                    <div className="form-group">
+                        <div className="form-label">아이디</div>
+                        <WriteId
+                            domain={domain}
+                            inputEmail={setEmail}
+                            inputDomain={setDomain}
+                        />
+                        <button
+                            type="button"
+                            onClick={handleCheckEmail}
+                        >
+                            이메일 중복 확인
+                        </button>
+                    </div>
 
-            <div>
-                <div>비밀번호</div>
-                <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={handleInputPwd}
-                    placeholder="비밀번호를 입력하세요"
-                />
-                {isMessage && <p style={{ color: "red" }}>{isMessage}</p>}
-            </div>
+                    <div className="form-group">
+                        <div className="form-label">비밀번호</div>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={handleInputPwd}
+                            placeholder="비밀번호를 입력하세요"
+                        />
+                        {isMessage && <p className="error-message">{isMessage}</p>}
+                    </div>
 
-            <div>
-                <div>비밀번호 확인</div>
-                <input
-                    id="passwordConfirm"
-                    type="password"
-                    value={passwordConfirm}
-                    onChange={(event) => setPasswordConfirm(event.target.value)}
-                    placeholder="비밀번호를 확인하세요"
-                />
-            </div>
+                    <div className="form-group">
+                        <div className="form-label">비밀번호 확인</div>
+                        <input
+                            id="passwordConfirm"
+                            type="password"
+                            value={passwordConfirm}
+                            onChange={(event) => setPasswordConfirm(event.target.value)}
+                            placeholder="비밀번호를 확인하세요"
+                        />
+                    </div>
 
-            <div>
-                <div>이름</div>
-                <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={handleChangeName}
-                    placeholder="이름을 입력하세요"
-                />
-            </div>
+                    <div className="form-group">
+                        <div className="form-label">이름</div>
+                        <input
+                            id="name"
+                            type="text"
+                            value={name}
+                            onChange={handleChangeName}
+                            placeholder="이름을 입력하세요"
+                        />
+                    </div>
 
-            <div>
-                <div>닉네임</div>
-                <input
-                    id="nickname"
-                    type="text"
-                    value={nickname}
-                    onChange={(event) => setNickname(event.target.value)}
-                    placeholder="닉네임을 입력하세요"
-                />
-            </div>
+                    <div className="form-group">
+                        <div className="form-label">닉네임</div>
+                        <input
+                            id="nickname"
+                            type="text"
+                            value={nickname}
+                            onChange={(event) => setNickname(event.target.value)}
+                            placeholder="닉네임을 입력하세요"
+                        />
+                    </div>
 
-            <div>
-                <div>전화번호</div>
-                <input
-                    id="tel"
-                    type="text"
-                    value={tel}
-                    onChange={handleChange}
-                    placeholder="전화번호를 입력하세요"
-                />
-            </div>
+                    <div className="form-group">
+                        <div className="form-label">전화번호</div>
+                        <input
+                            id="tel"
+                            type="text"
+                            value={tel}
+                            onChange={handleChange}
+                            placeholder="전화번호를 입력하세요"
+                        />
+                    </div>
 
-            <div>
-                <Address
-                    inputZipCode={setZipCode}
-                    inputDetailAddress={setDetailAddress}
-                    inputExtraAddress={setExtraAddress}
-                />
-            </div>
+                    <div className="form-group">
+                        <Address
+                            inputZipCode={setZipCode}
+                            inputDetailAddress={setDetailAddress}
+                            inputExtraAddress={setExtraAddress}
+                        />
+                    </div>
 
-            <div>
-                <button type="button" onClick={handleSubmit}>회원가입 하기</button>
+                    <div className="form-group">
+                        <button type="button" onClick={handleSubmit}>회원가입 하기</button>
+                    </div>
+                </div>
             </div>
         </>
     );
+
 }
 
 export default CreateAccount;

@@ -1,12 +1,13 @@
 .container {
+    /* width: 100vh; */
     display: flex;
-    margin-left: 10vh;
+    justify-content: center;
+    /* align-items: center; */
 }
 
 .calendar-container {
     width: 700px;
     height: 850px;
-    border: 2px solid black;
     overflow: hidden;
 }
 
@@ -15,9 +16,53 @@
     flex-direction: column;
     margin-left: 20px;
 }
+.account-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.account-container table tbody tr {
+    line-height: 2rem;
+}
+
+.account-section tbody tr:nth-child(odd) {
+    background-color: #f3faff;
+}
 
 .account-container {
     margin-bottom: 10px;
+}
+
+.account-container button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.account-container input {
+    padding: 4px;
+    border: none;
+    box-sizing: border-box;
+    border-bottom: 1px solid #b0afff;
+    margin-right: 5px;
+    background-color: transparent;
+    text-align: center;
+}
+
+.account-container input:focus {
+    outline:none;
+}
+
+.account-container select {
+    padding: 4px;
+    border: none;
+    box-sizing: border-box;
+    width: 85px;
+    background-color: transparent;
+}
+
+#recordAmount {
+    width: 100px;
 }
 
 textarea {
@@ -31,6 +76,7 @@ textarea:focus {
     outline: none;
 }
 
-/* .daily-account {
 
-} */
+.fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
+    border:2px solid red;
+}
