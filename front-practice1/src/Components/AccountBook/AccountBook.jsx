@@ -43,7 +43,7 @@ export default function AccountBook() {
         }));
 
         saveRecords(records)
-            .then(response => {
+            .then(() => {
                 alert("저장 성공");
 
                 setRows([

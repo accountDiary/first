@@ -2,6 +2,7 @@ package com.template.restapi.endpoint.record;
 
 import com.template.restapi.aggregate.record.domain.entity.RecordDto;
 import com.template.restapi.feature.record.service.RecordService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +22,12 @@ public class RecordController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Void> saveRecords(@RequestBody List<RecordDto> records) {
-        recordService.saveRecords(records);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> saveRecords(@RequestBody List<RecordDto> records) {
+        try {
+            recordService.saveRecords(records);
+            return ResponseEntity.ok("저장 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("저장 실패");
+        }
     }
 }
