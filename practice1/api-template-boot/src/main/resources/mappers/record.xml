@@ -27,12 +27,15 @@
         AND r.record_date = '2024-07-11'
     </select>
 
-    <!-- 가계부 한 줄 추가 -->
-    <insert id="insertRecord" parameterType="RecordDto">
+    <!-- 가계부 추가 -->
+    <insert id="insertRecords" parameterType="java.util.List">
         INSERT INTO
             record(record_type, user_id, payment_id, category_id,
                     record_amount, record_details, record_date)
-        VALUES (#{record_type}, 1, #{payment_id}, #{category_id},
-                    #{record_amount}, #{record_details}, #{record_date})
+        VALUES
+        <foreach collection="records" item="record" separator=",">
+            (#{record.record_type}, #{record.user_id}, #{record.payment_id}, #{record.category_id},
+            #{record.record_amount}, #{record.record_details}, #{record.record_date})
+        </foreach>
     </insert>
 </mapper>

@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Calendar from "../Container/Calendar";
 import AccountInputTable from "./AccountInputTable";
 import { getCategories, getPaymentList } from "../../Api/api.categories.js";
+import { saveRecords } from "../../Api/api.record.js";
 import "../../Css/AccountBook.css";
 
 export default function AccountBook() {
@@ -29,6 +30,33 @@ export default function AccountBook() {
         navigate(`/writeAccountBook?date=${clickDate}`);
     };
 
+    const handleSaveClick = () => {
+        const records = rows.map(row => ({
+            ...row,
+            record_date: date,
+            user_id: 1,
+            record_type: row.category,
+            category_id: row.subCategory,
+            payment_id: row.paymentType,
+            record_amount: row.recordAmount,
+            record_details: row.recordDetails
+        }));
+
+        saveRecords(records)
+            .then(response => {
+                alert("저장 성공");
+
+                setRows([
+                    { category: "", subCategory: "", paymentType: "", recordAmount: "", recordDetails: "", subCategories: [] }
+                ]);
+
+                navigate(`/writeAccountBook?date=${date}`);
+            })
+            .catch(error => {
+                alert("Error: " + error.message);
+            });
+    }
+
     return (
         <div className="container">
             <div className="calendar-container">
@@ -51,7 +79,7 @@ export default function AccountBook() {
                         <textarea id="todaysReview" placeholder="내용을 입력해주세요."></textarea>
                     </div>
                 </div>
-                <button type="button">등록하기</button>
+                <button type="button" onClick={handleSaveClick}>등록하기</button>
             </div>
         </div>
     );

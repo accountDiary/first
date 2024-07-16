@@ -12,7 +12,7 @@ public class PaymentStore {
 
     public final SqlSessionTemplate sqlSessionTemplate;
 
-    public PaymentStore(SqlSessionTemplate sqlSessionTemplate) { this.sqlSessionTemplate =sqlSessionTemplate; }
+    public PaymentStore(SqlSessionTemplate sqlSessionTemplate) { this.sqlSessionTemplate = sqlSessionTemplate; }
 
     public List<PaymentDto> selectPayment() {
         return sqlSessionTemplate
