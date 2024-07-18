@@ -25,8 +25,10 @@ public class RecordController {
     public ResponseEntity<String> saveRecords(@RequestBody List<RecordDto> records) {
         try {
             recordService.saveRecords(records);
+            System.out.println("성공");
             return ResponseEntity.ok("저장 성공");
         } catch (Exception e) {
+            System.out.println("실패");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("저장 실패");
         }
     }

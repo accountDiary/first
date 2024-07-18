@@ -6,7 +6,7 @@ import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SelectBox from "../SelectBox/SelectBox";
 import { getIncomeCategories, getSpendingCategories } from "../../Api/api.categories.js";
 
-export default function AccountTable({ categories, paymentCategories, rows, setRows }) {
+export default function AccountTable({ categories, paymentCategories, rows, setRows, recordAmount, setRecordAmount }) {
 
     const handleCategoryChange = (event, index) => {
         //선택한 카테고리 값 가져옴
@@ -51,11 +51,25 @@ export default function AccountTable({ categories, paymentCategories, rows, setR
         const paymentSelected = event.target.value;
         const newRows = [...rows];
 
+        let recordAmount = event.target.value;
+        recordAmount = Number(recordAmount.replaceAll(",", ""));
+        if (isNaN(recordAmount)) {
+            setRecordAmount(0);
+        } else {
+            setRecordAmount(recordAmount.toLocaleString("ko-KR"));
+        }
+
         newRows[index].paymentType = paymentSelected;
 
     }
 
-    const handleInputChange = (event, index, field) => {
+    const handleAmountInputChange = (event, index, field) => {
+        const newRows = [...rows];
+        newRows[index][field] = event.target.value;
+        setRows(newRows);
+    }
+
+    const handleDetailsInputChange = (event, index, field) => {
         const newRows = [...rows];
         newRows[index][field] = event.target.value;
         setRows(newRows);
@@ -64,7 +78,7 @@ export default function AccountTable({ categories, paymentCategories, rows, setR
     //행 추가
     const addRow = () => {
         //새로운 행 추가해서 행 상태 업데이트
-        setRows([...rows, { category: "", subCategory: "", paymentType:"", recordAmount: "", recordDetails: "", subCategories: [] }]);
+        setRows([...rows, { category: "", subCategory: "", paymentType: "", recordAmount: "", recordDetails: "", subCategories: [] }]);
     }
 
     //행 삭제
@@ -128,7 +142,7 @@ export default function AccountTable({ categories, paymentCategories, rows, setR
                                     name={`recordAmount${index}`}
                                     type="number"
                                     value={row.recordAmount}
-                                    onChange={(event) => handleInputChange(event, index, "recordAmount")}
+                                    onChange={(event) => handleAmountInputChange(event, index, "recordAmount")}
                                 />
                             </td>
                             <td>
@@ -137,16 +151,18 @@ export default function AccountTable({ categories, paymentCategories, rows, setR
                                     name={`recordDetails${index}`}
                                     type="text"
                                     value={row.recordDetails}
-                                    onChange={(event) => handleInputChange(event, index, "recordDetails")}
+                                    onChange={(event) => handleDetailsInputChange(event, index, "recordDetails")}
                                 />
                             </td>
                             <td>
-                                <button
-                                    type="button"
-                                    onClick={() => deleteRow(index)}
-                                >
-                                    <FontAwesomeIcon icon={faXmark} />
-                                </button>
+                                {rows.length > 1 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => deleteRow(index)}
+                                    >
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </button>
+                                )}
                             </td>
                         </tr>
                     ))}

@@ -16,6 +16,10 @@ export default function AccountBook() {
 
     const [searchParams] = useSearchParams();
     const date = searchParams.get("date");
+    // const userNickname = searchParams.get("user");
+
+    const [recordAmount, setRecordAmount] = useState(0);
+
 
     const navigate = useNavigate();
 
@@ -31,10 +35,35 @@ export default function AccountBook() {
     };
 
     const handleSaveClick = () => {
+        // .some() 메서드는 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나 이상 통과하는지 테스트할 수 있음
+        // 주어진 함수가 참이면 true, 거짓이면 false 반환
+        const hasEmptyCategory = rows.some(row => !row.category.trim());
+        const hasEmptySubCategory = rows.some(row => !row.subCategory.trim());
+        const hasEmptyPaymentType = rows.some(row => !row.paymentType.trim());
+        const hasEmptyAmount = rows.some(row => !row.recordAmount.trim());
+
+        if(hasEmptyCategory) {
+            alert("수입/지출 카테고리를 확인해주세요.");
+            return;
+        }
+        if(hasEmptySubCategory) {
+            alert("내역 카테고리를 확인해주세요.");
+            return;
+        }
+        if(hasEmptyPaymentType) {
+            alert("방식 카테고리를 확인해주세요.");
+            return;
+        }
+        if(hasEmptyAmount) {
+            alert("금액을 확인해주세요.");
+            return;
+        }
+        
         const records = rows.map(row => ({
             ...row,
             record_date: date,
             user_id: 1,
+            //user_nickname: userNickname,
             record_type: row.category,
             category_id: row.subCategory,
             payment_id: row.paymentType,
@@ -43,17 +72,16 @@ export default function AccountBook() {
         }));
 
         saveRecords(records)
-            .then(() => {
-                alert("저장 성공");
-
-                setRows([
-                    { category: "", subCategory: "", paymentType: "", recordAmount: "", recordDetails: "", subCategories: [] }
-                ]);
-
-                navigate(`/writeAccountBook?date=${date}`);
+            .then(message => {
+                alert(message);
+                // setRows([
+                //     { category: "", subCategory: "", paymentType: "", recordAmount: "", recordDetails: "", subCategories: [] }
+                // ]);
+                // navigate(`/writeAccountBook?date=${date}`);
             })
-            .catch(error => {
-                alert("Error: " + error.message);
+            .catch(error => { 
+                console.error("에러: ", error);
+                alert(error);
             });
     }
 
@@ -65,12 +93,17 @@ export default function AccountBook() {
                 />
             </div>
             <div className="account-section">
+                <div>
+                    <h2>{date}</h2>
+                </div>
                 <div className="account-container">
                     <AccountInputTable
                         categories={categories}
                         paymentCategories={paymentCategories}
                         rows={rows}
                         setRows={setRows}
+                        recordAmount={recordAmount}
+                        setRecordAmount={setRecordAmount}
                     />
                 </div>
                 <div className="daily-account">
