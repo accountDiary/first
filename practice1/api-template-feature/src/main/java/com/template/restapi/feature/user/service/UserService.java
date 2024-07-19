@@ -2,7 +2,6 @@ package com.template.restapi.feature.user.service;
 
 import com.template.restapi.aggregate.user.domain.entity.UserDto;
 import com.template.restapi.aggregate.user.domain.logic.UserLogic;
-import com.template.restapi.aggregate.user.store.repository.UserRepository;
 import com.template.restapi.feature.user.actions.UtilAction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,6 @@ import java.util.Map;
 public class UserService {
 
     private final UserLogic userLogic;
-    private final UserRepository userRepository;
     private final UtilAction utilAction;
 
     // User가 오늘 할 수 있는 미션 리스트 조회
@@ -28,6 +26,7 @@ public class UserService {
         return userLogic.findUserList();
     }
 
+    //유저 생성
     public UserDto saveUser(Map<String, Object> formData) {
 
         UserDto userDto = new UserDto();
@@ -43,8 +42,9 @@ public class UserService {
 
     }
 
+    //이메일 중복 확인
     public boolean isEmailExist(String email) {
-        UserDto userDto= userLogic.isEmailExist(email);
+        UserDto userDto = userLogic.isEmailExist(email);
         return userDto != null;
     }
 
