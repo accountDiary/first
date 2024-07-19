@@ -1,9 +1,7 @@
 package com.template.restapi.endpoint.user;
 
-import com.template.restapi.aggregate.post.domain.entity.PostDto;
 import com.template.restapi.aggregate.user.domain.entity.UserDto;
 import com.template.restapi.endpoint.user.request.UserQueryRequest;
-import com.template.restapi.feature.post.service.PostService;
 import com.template.restapi.feature.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,13 +20,10 @@ import java.util.Map;
 public class UserRestController {
 
     private final UserService userService;
-    private final PostService postService;
 
-    public UserRestController(UserService userService, PostService postService) {
+    public UserRestController(UserService userService) {
         this.userService = userService;
-        this.postService = postService;
     }
-
 
     /*
     * Controller Example
@@ -63,7 +58,7 @@ public class UserRestController {
         String email = (String) formData.get("email");
 
         if(userService.isEmailExist(email)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("이메일이 이미 존재합니다");
+            return ResponseEntity.ok("이메일이 이미 존재합니다");
         } else {
             return ResponseEntity.ok("사용 가능한 이메일입니다.");
         }
