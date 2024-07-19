@@ -8,15 +8,15 @@ export default function Address({ inputZipCode, inputDetailAddress, inputExtraAd
 
     const completeHandler = (data) => {
         const { address, zonecode } = data;
-        
+
         // 상태 업데이트
         setZipCode(zonecode);
         setDetailAddress(address);
-        
-        //부모 컴포넌트로 전달
+
+        // 부모 컴포넌트로 전달
         inputZipCode(zonecode);
         inputDetailAddress(address);
-        
+
         setIsOpen(false);
     }
 
@@ -86,5 +86,5 @@ export default function Address({ inputZipCode, inputDetailAddress, inputExtraAd
                 placeholder="상세주소를 입력하세요(선택)"
             />
         </>
-    )
+    );
 }
