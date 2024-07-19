@@ -6,7 +6,7 @@
     <select id="selectPost" resultType="PostDto">
         SELECT *
         FROM post
-        WHERE user_id = #{user_id}
+<!--        WHERE user_id = #{user_id}-->
 <!--        AND DATE(post_date) = #{post_date}-->
     </select>
 
