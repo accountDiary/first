@@ -4,8 +4,9 @@ import axios from "axios";
 import TabButton from "./TabButton";
 import LoginModal from "./Login/LoginModal.jsx";
 import { tab } from "../../data.js";
+import PostListPage from "../Diary/Pages/PostListPage.jsx";
 
-export default function Header() {
+export default function Header({ onTabSelect }) {
   const [selectedContent, setSelectedContent] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userList, setUserList] = useState([]);
@@ -19,13 +20,15 @@ export default function Header() {
   function handleSelect(selectedButton) {
     // selectedbutton이 diary랑 accountbook인거 알 수 있도록 구분하기 위함
     //setSelectedContent을 부를 때 즉 상태를 업데이트 시키는 함수를 부를때 리액트는 이 컴포넌트 함수를 재실행함 그리고 업데이트된 값을 사용할 수 있음
-    //setSelectedContent(selectedButton);
-    //console.log(selectedButton)
-    if (isLoggedIn) {
-      setSelectedContent(selectedButton);
-    } else {
-      alert("로그인 후 이용 가능합니다.");
+    setSelectedContent(selectedButton);
+    if (typeof onTabSelect === "function") {
+      onTabSelect(selectedButton);
     }
+    // if (isLoggedIn) {
+    //   setSelectedContent(selectedButton);
+    // } else {
+    //   alert("로그인 후 이용 가능합니다.");
+    // }
   }
 
   // 로그인 버튼 클릭 시 호출되는 함수
@@ -94,8 +97,7 @@ export default function Header() {
       <main>
         {selectedContent && (
           <div id="tab-content">
-            <h3>{tab[selectedContent].title}</h3>
-            <p>{tab[selectedContent].description}</p>
+           {selectedContent === "diary"&& <PostListPage/>}
           </div>
         )}
       </main>

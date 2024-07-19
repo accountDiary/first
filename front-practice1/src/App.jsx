@@ -5,11 +5,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from "./Components/Header/Header.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import CreateAccount from "./Components/CreateAccount/CreateAccount.jsx";
+import { Provider } from 'react-redux';
+import store from './Redux/store.js';
+
 
 function App() {
 
     return (
-        <BrowserRouter>
+        <Provider store={store}>      
+            <BrowserRouter>
             <div className="App">
                 <Header />
 
@@ -21,6 +25,8 @@ function App() {
                 <Footer />
             </div>
         </BrowserRouter>
+        </Provider>
+
     );
 }
 

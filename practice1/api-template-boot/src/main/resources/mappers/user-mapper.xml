@@ -22,7 +22,7 @@
     </select>
 
     <!-- 로그인 시 아이디와 비밀번호가 맞는 사용자 찾기 -->
-    <select id="selectUserForLogin" parameterType="map" resultType="UserDto">
+    <select id="selectUserEmailAndPwd"  parameterType="map"  resultType="UserDto">
         SELECT *
         FROM user_info
         WHERE user_email = #{user_email}
