@@ -18,9 +18,6 @@ export default function AccountBook() {
     const date = searchParams.get("date");
     // const userNickname = searchParams.get("user");
 
-    const [recordAmount, setRecordAmount] = useState(0);
-
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -102,8 +99,6 @@ export default function AccountBook() {
                         paymentCategories={paymentCategories}
                         rows={rows}
                         setRows={setRows}
-                        recordAmount={recordAmount}
-                        setRecordAmount={setRecordAmount}
                     />
                 </div>
                 <div className="daily-account">

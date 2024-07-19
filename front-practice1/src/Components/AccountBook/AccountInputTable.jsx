@@ -6,7 +6,7 @@ import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import SelectBox from "../SelectBox/SelectBox";
 import { getIncomeCategories, getSpendingCategories } from "../../Api/api.categories.js";
 
-export default function AccountTable({ categories, paymentCategories, rows, setRows, recordAmount, setRecordAmount }) {
+export default function AccountTable({ categories, paymentCategories, rows, setRows }) {
 
     const handleCategoryChange = (event, index) => {
         //선택한 카테고리 값 가져옴
@@ -50,14 +50,6 @@ export default function AccountTable({ categories, paymentCategories, rows, setR
     const handlePaymentTypeChange = (event, index) => {
         const paymentSelected = event.target.value;
         const newRows = [...rows];
-
-        let recordAmount = event.target.value;
-        recordAmount = Number(recordAmount.replaceAll(",", ""));
-        if (isNaN(recordAmount)) {
-            setRecordAmount(0);
-        } else {
-            setRecordAmount(recordAmount.toLocaleString("ko-KR"));
-        }
 
         newRows[index].paymentType = paymentSelected;
 
