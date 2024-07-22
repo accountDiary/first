@@ -63,7 +63,7 @@
   background-color: #0056b3;
 }
 
-/* 닫기 버튼 스타일 */
+/* 회원가입 버튼 스타일 */
 .ReactModal__Content button:nth-of-type(2) {
   background-color: #6c757d;
 }

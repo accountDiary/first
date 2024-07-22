@@ -8,5 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostRepository {
     PostDto selectPost();
-    PostDto insertPost();
+
+    //게시글삽입
+    void insertPost(PostDto postDto);
 }
