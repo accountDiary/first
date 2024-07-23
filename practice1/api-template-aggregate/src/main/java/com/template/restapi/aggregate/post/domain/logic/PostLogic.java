@@ -16,8 +16,7 @@ public class PostLogic {
         return postStore.selectPost();
     }
 
-    public PostDto savePost(PostDto postDto) {
-         postStore.insertPost(postDto);
-         return postDto;
+    public PostDto savePost() {
+        return postStore.insertPost();
     }
 }

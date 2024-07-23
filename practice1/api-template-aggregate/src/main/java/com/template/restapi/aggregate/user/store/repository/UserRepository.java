@@ -14,9 +14,4 @@ public interface UserRepository {
     //반환할 값이 없으니 void를 쓴다
     void insertUser(UserDto userDto);
     UserDto selectUserEmail(@Param("user_email") String email);
-
-    UserDto selectUserEmailAndPwd(
-            @Param("user_email") String email,
-            @Param("user_password") String password
-    );
 }

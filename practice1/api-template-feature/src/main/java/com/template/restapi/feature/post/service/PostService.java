@@ -13,12 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Slf4j
 public class PostService {
-   private final PostLogic postLogic;
+    private final PostLogic postLogic;
 
-//    public PostDto showPost() {
-//        return postLogic.showPost();
-//    }
-//
-   public PostDto savePost(PostDto postDto) {
-      return postLogic.savePost(postDto); }
+    public PostDto showPost() {
+        return postLogic.showPost();
+    }
+
+    public PostDto savePost() { return postLogic.savePost(); }
 }
