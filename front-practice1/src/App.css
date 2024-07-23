@@ -1,19 +1,5 @@
-html, body, #root {
-  height: 100%;
-  margin: 0;
-}
-
 .App {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  /* min-height: 100vh; */
-}
-
-.App-header {
-  background-color: #282c34;
-  padding: 10px;
-  color: white;
 }
 
 .App-logo {
@@ -27,10 +13,20 @@ html, body, #root {
   }
 }
 
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
 header {
   background-color: #f1f1f1;
   padding: 10px;
-  margin-bottom: 10vh;
 }
 
 .header-content {
@@ -40,16 +36,8 @@ header {
   width: 100%;
 }
 
-main {
-  flex: 1;  /* Flexbox layout to push footer to the bottom */
-  padding: 20px;
-}
-
-footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-  text-align: center;
-  margin-top: 10vh;
+.App-link {
+  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -61,7 +49,7 @@ footer {
   }
 }
 
-/* Additional styles */
+/* App 컴포넌트에 대한 스타일 */
 
 #tab {
   display: flex;
@@ -73,8 +61,8 @@ footer {
 #tab menu {
   display: flex;
   list-style-type: none;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
 }
 
 #tab menu button {

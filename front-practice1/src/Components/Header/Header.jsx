@@ -36,22 +36,6 @@ export default function Header({ onTabSelect }) {
     setIsLoggedIn(true);
     setIsModalOpen(false);
   };
-    useEffect(() => {
-        console.log("모달 상태 변경 확인 :", isModalOpen);
-    }, [isModalOpen]);
-    
-    //탭 선택 함수
-    function handleSelect(selectedButton) {
-        // selectedbutton이 diary랑 accountbook인거 알 수 있도록 구분하기 위함
-        //setSelectedContent을 부를 때 즉 상태를 업데이트 시키는 함수를 부를때 리액트는 이 컴포넌트 함수를 재실행함 그리고 업데이트된 값을 사용할 수 있음
-        //setSelectedContent(selectedButton);
-        //console.log(selectedButton)
-        // if (isLoggedIn) {
-            setSelectedContent(selectedButton);
-        // } else {
-        //     alert("로그인 후 이용 가능합니다.");
-        // }
-    };
 
   // 사용자 데이터를 불러오는 비동기 함수
   const userData = async () => {
@@ -97,26 +81,28 @@ export default function Header({ onTabSelect }) {
               
               버튼이 클릭되고 나서 함수가 실행되면 그 이후 화살표 함수 안에 코드가 실행되는거임 
               */}
-                            <TabButton
-                                isSelected={selectedContent === 'acount'}
-                                onSelect={() => handleSelect('account')}>ACCOUNTBOOK</TabButton>
-                        </menu>
-                    </section>
-                    <div id="login">
-                        <button onClick={openModal}>로그인</button>
-                    </div>
-                </div>
-            </header>
-            {/* <main>
-                {selectedContent && (
-                    <div id="tab-content">
-                        <h3>{tab[selectedContent].title}</h3>
-                        <p>{tab[selectedContent].description}</p>
-                    </div>
-                )}
-            </main> */}
-            {/* 모달부분 */}
-            {isModalOpen && <LoginModal onClose={closeModal} />}
-        </>
-    )
+              <TabButton
+                isSelected={selectedContent === "acount"}
+                onSelect={() => handleSelect("account")}
+              >
+                ACCOUNTBOOK
+              </TabButton>
+            </menu>
+          </section>
+          <div id="login">
+            <button onClick={openModal}>로그인</button>
+          </div>
+        </div>
+      </header>
+      <main>
+        {selectedContent && (
+          <div id="tab-content">
+           {selectedContent === "diary"&& <PostListPage/>}
+          </div>
+        )}
+      </main>
+      {/* 모달부분 */}
+      <LoginModal isOpen={isModalOpen} onClose={closeModal} />
+    </>
+  );
 }
