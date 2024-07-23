@@ -2,9 +2,7 @@ package com.template.restapi.endpoint.recordCategory;
 
 import com.template.restapi.aggregate.record_category.domain.entity.RecordCategoryDto;
 import com.template.restapi.feature.record_category.service.RecordCategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 

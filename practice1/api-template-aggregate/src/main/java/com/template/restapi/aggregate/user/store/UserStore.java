@@ -34,4 +34,10 @@ public class UserStore {
                 .getMapper(UserRepository.class)
                 .selectUserEmail(email);
     }
+
+    public UserDto selectUserEmailAndPwd(String email, String password) {
+        return sqlSessionTemplate
+                .getMapper(UserRepository.class)
+                .selectUserEmailAndPwd(email, password);
+    }
 }

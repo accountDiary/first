@@ -2,12 +2,16 @@ package com.template.restapi.feature.user.service;
 
 import com.template.restapi.aggregate.user.domain.entity.UserDto;
 import com.template.restapi.aggregate.user.domain.logic.UserLogic;
+import com.template.restapi.aggregate.user.store.UserStore;
+import com.template.restapi.aggregate.user.store.repository.UserRepository;
 import com.template.restapi.feature.user.actions.UtilAction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.naming.AuthenticationException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +51,10 @@ public class UserService {
         UserDto userDto = userLogic.isEmailExist(email);
         return userDto != null;
     }
+
+//    public UserDto login(String email, String password) throws AuthenticationException {
+//        return userLogic.loginUser(email, password);
+//    }
 
 
 

@@ -11,21 +11,39 @@
     </select>
 
     <!-- 글 작성하기 -->
+<!--    <insert id="insertPost" parameterType="PostDto">-->
+<!--        INSERT INTO post-->
+<!--            (user_id, post_writer, title, sub_title, content)-->
+<!--        VALUES-->
+<!--            (-->
+<!--                #{user_id},-->
+<!--                (SELECT user_nickname FROM user_info WHERE user_id = #{user_id}),-->
+<!--                #{title}, #{sub_title}, #{content}-->
+<!--            )-->
+<!--    </insert>-->
+
+<!--    &lt;!&ndash; 해당하는 본인 포스트 한 개 삭제하기 &ndash;&gt;-->
+<!--    <delete id="deletePost" parameterType="PostDto">-->
+<!--        DELETE FROM post-->
+<!--        WHERE post_id = #{post_id} AND user_id = #{user_id}-->
+<!--    </delete>-->
+<!-- 여기서 부터 내가 한 부분! -->
+<!--    게시글 조회 -->
+    <!-- 게시글 등록 -->
     <insert id="insertPost" parameterType="PostDto">
-        INSERT INTO post
-            (user_id, post_writer, title, sub_title, content)
-        VALUES
-            (
-                #{user_id},
-                (SELECT user_nickname FROM user_info WHERE user_id = #{user_id}),
-                #{title}, #{sub_title}, #{content}
-            )
+        INSERT INTO posts (post_writer, post_date, post_modify, title, sub_title, content, view_cnt)
+        VALUES ( #{post_writer}, #{post_date}, #{post_modify}, #{title}, #{sub_title}, #{content}, #{view_cnt})
     </insert>
 
-    <!-- 해당하는 본인 포스트 한 개 삭제하기 -->
-    <delete id="deletePost" parameterType="PostDto">
-        DELETE FROM post
-        WHERE post_id = #{post_id} AND user_id = #{user_id}
-    </delete>
+    <!-- 게시글 수정 -->
+    <update id="updatePost" parameterType="PostDto">
+        UPDATE posts
+        SET post_writer = #{post_writer}, post_modify = #{post_modify}, title = #{title}, sub_title = #{sub_title}, content = #{content}
+        WHERE post_id = #{post_id}
+    </update>
 
+    <!-- 게시글 삭제 -->
+    <delete id="deletePost" parameterType="int">
+        DELETE FROM posts WHERE post_id = #{post_id}
+    </delete>
 </mapper>
