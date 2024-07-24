@@ -25,7 +25,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("PostDto")
 public class PostDto {
     private int post_id;
-    //private int user_id;
+    private int user_id;
     private String post_writer;
     private String post_date;
     private String post_modify;
