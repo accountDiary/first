@@ -5,15 +5,20 @@ import com.template.restapi.aggregate.user.domain.entity.UserDto;
 import com.template.restapi.endpoint.user.request.UserQueryRequest;
 import com.template.restapi.feature.post.service.PostService;
 import com.template.restapi.feature.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.naming.AuthenticationException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
+@Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserRestController {
 
     private final UserService userService;
@@ -34,6 +39,19 @@ public class UserRestController {
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
+    @GetMapping("/test/list")
+    public Map<String, Object> list() {
+        Map<String, Object> resultMap = new HashMap<>();
+
+        List<UserDto> userList = userService.findUserList();
+       // PostDto post = postService.showPost();
+        resultMap.put("userList", userList);
+        System.out.println("유저리스트: " + userList);
+        //System.out.println("포스트: " + post);
+
+        return resultMap;
+    }
+
     @PostMapping("/saveUser")
     public ResponseEntity<UserDto> newUser(@RequestBody Map<String, Object> formData) {
         UserDto savedUser = userService.saveUser(formData);
@@ -51,4 +69,27 @@ public class UserRestController {
         }
     }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<UserDto> login(@RequestBody Map<String,Object> response) {
+//
+//        String email = (String) response.get("email");
+//        String password = (String) response.get("password");
+//
+//        System.out.println("Login request received for email: " + email);
+//
+//
+//        try {
+//            UserDto user = userService.login(email, password);
+//
+//            if (user != null) {
+//                return ResponseEntity.ok(user);
+//            } else {
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+//            }
+//        } catch (AuthenticationException e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+//        }
+//
+//    }
 }

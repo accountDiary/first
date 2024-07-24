@@ -17,10 +17,10 @@ public class PostStore {
                 .selectPost();
     }
 
-    public PostDto insertPost() {
-        return sqlSessionTemplate
+    public void insertPost(PostDto postDto) {
+        sqlSessionTemplate
                 .getMapper(PostRepository.class)
-                .insertPost();
+                .insertPost(postDto);
     }
 
 }
