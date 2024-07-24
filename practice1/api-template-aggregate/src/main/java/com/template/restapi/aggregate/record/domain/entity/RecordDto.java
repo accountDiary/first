@@ -31,4 +31,8 @@ public class RecordDto {
     private String record_details;
     private String record_memo;
     private String record_date;
+
+    private String payment_type;
+    private String record_type;
+    private String category_name;
 }
