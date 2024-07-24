@@ -6,8 +6,6 @@ import Header from "./Components/Header/Header.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
 import FullCalendar from "./Components/Container/Calendar.jsx";
 import CreateAccount from "./Components/CreateAccount/CreateAccount.jsx";
-import { Provider } from 'react-redux';
-import store from './Redux/store.js';
 import AccountBook from "./Components/AccountBook/AccountBook.jsx";
 
 const Layout = () => (
