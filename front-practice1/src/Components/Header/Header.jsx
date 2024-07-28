@@ -97,26 +97,28 @@ export default function Header({ onTabSelect }) {
               
               버튼이 클릭되고 나서 함수가 실행되면 그 이후 화살표 함수 안에 코드가 실행되는거임 
               */}
-                            <TabButton
-                                isSelected={selectedContent === 'acount'}
-                                onSelect={() => handleSelect('account')}>ACCOUNTBOOK</TabButton>
-                        </menu>
-                    </section>
-                    <div id="login">
-                        <button onClick={openModal}>로그인</button>
-                    </div>
-                </div>
-            </header>
-            {/* <main>
-                {selectedContent && (
-                    <div id="tab-content">
-                        <h3>{tab[selectedContent].title}</h3>
-                        <p>{tab[selectedContent].description}</p>
-                    </div>
-                )}
-            </main> */}
-            {/* 모달부분 */}
-            {isModalOpen && <LoginModal onClose={closeModal} />}
-        </>
-    )
+              <TabButton
+                isSelected={selectedContent === "acount"}
+                onSelect={() => handleSelect("account")}
+              >
+                ACCOUNTBOOK
+              </TabButton>
+            </menu>
+          </section>
+          <div id="login">
+            <button onClick={openModal}>로그인</button>
+          </div>
+        </div>
+      </header>
+      <main>
+        {selectedContent && (
+          <div id="tab-content">
+           {selectedContent === "diary"&& <PostListPage/>}
+          </div>
+        )}
+      </main>
+      {/* 모달부분 */}
+      <LoginModal isOpen={isModalOpen} onClose={closeModal} />
+    </>
+  );
 }
