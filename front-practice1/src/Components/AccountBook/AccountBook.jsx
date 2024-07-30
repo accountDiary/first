@@ -23,7 +23,6 @@ export default function AccountBook() {
     useEffect(() => {
         getCategories().then(data => setCategories(data));
         getPaymentList().then(data => setPaymentCategories(data));
-
     }, [date]);
 
     const handleDateClick = (pickDate) => {
