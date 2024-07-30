@@ -21,12 +21,4 @@
         WHERE user_email = #{user_email};
     </select>
 
-    <!-- 로그인 시 아이디와 비밀번호가 맞는 사용자 찾기 -->
-    <select id="selectUserEmailAndPwd"  parameterType="map"  resultType="UserDto">
-        SELECT *
-        FROM user_info
-        WHERE user_email = #{user_email}
-        AND user_pwd = #{user_pwd}
-    </select>
-
 </mapper>
