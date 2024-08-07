@@ -16,7 +16,15 @@ import java.util.List;
 public class RecordService {
     private final RecordLogic recordLogic;
 
+    public List<RecordDto> readRecords(String date) {
+        return recordLogic.readRecords(date);
+    }
+
     public void saveRecords(List<RecordDto> records) {
         recordLogic.saveRecords(records);
+    }
+
+    public int recordCnt(String date) {
+        return recordLogic.recordCnt(date);
     }
 }

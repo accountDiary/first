@@ -12,7 +12,15 @@ public class RecordLogic {
 
     public RecordLogic(RecordStore recordStore) { this.recordStore = recordStore; }
 
+    public List<RecordDto> readRecords(String date) {
+        return recordStore.selectRecord(date);
+    }
+
     public void saveRecords(List<RecordDto> records) {
         recordStore.insertRecords(records);
+    }
+
+    public int recordCnt(String date) {
+        return recordStore.recordCnt(date);
     }
 }

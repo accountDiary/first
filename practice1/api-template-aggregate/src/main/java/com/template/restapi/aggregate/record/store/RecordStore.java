@@ -14,10 +14,21 @@ public class RecordStore {
 
     public RecordStore (SqlSessionTemplate sqlSessionTemplate) { this.sqlSessionTemplate = sqlSessionTemplate; }
 
+    public List<RecordDto> selectRecord(String date) {
+        return sqlSessionTemplate
+                .getMapper(RecordRepository.class)
+                .selectRecord(date);
+    }
     public void insertRecords(List<RecordDto> records) {
         sqlSessionTemplate
                 .getMapper(RecordRepository.class)
                 .insertRecords(records);
+    }
+
+    public int recordCnt(String date) {
+        return sqlSessionTemplate
+                .getMapper(RecordRepository.class)
+                .recordsCnt(date);
     }
 
 }

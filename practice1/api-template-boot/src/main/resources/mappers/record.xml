@@ -24,7 +24,7 @@
         LEFT JOIN category c
         ON r.category_id = c.category_id
         WHERE r.user_id = 1
-        AND r.record_date = '2024-07-11'
+        AND r.record_date = #{record_date}
     </select>
 
     <!-- 가계부 추가 -->
@@ -38,4 +38,11 @@
             #{record.record_amount}, #{record.record_details}, #{record.record_date})
         </foreach>
     </insert>
+
+    <!-- 해당하는 날짜에 있는 가계부 개수 -->
+    <select id="recordsCnt" resultType="int">
+        SELECT COUNT(*)
+        FROM record
+        WHERE record_date=#{record_date}
+    </select>
 </mapper>
