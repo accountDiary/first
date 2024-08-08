@@ -15,10 +15,13 @@
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+    width: 640px;
 }
+
 .account-section table {
     width: 100%;
     border-collapse: collapse;
+    text-align: center;
 }
 
 .account-container table tbody tr {
@@ -50,7 +53,7 @@
 }
 
 .account-container input:focus {
-    outline:none;
+    outline: none;
 }
 
 .account-container select {
@@ -76,7 +79,6 @@ textarea:focus {
     outline: none;
 }
 
-
 .fc-daygrid-day-frame .fc-scrollgrid-sync-inner {
-    border:2px solid red;
+    border: 2px solid red;
 }

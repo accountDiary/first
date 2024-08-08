@@ -1,5 +1,18 @@
 import axios from "axios";
 
+// 가계부 기록 불러오기
+export const loadRecords = async (date) => {
+  return await axios
+    .get("/api/record/records", { params: { date } })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+}
+
+
 // 가계부 기록 저장
 export const saveRecords = async (records) => {
   return await axios

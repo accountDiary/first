@@ -19,7 +19,8 @@ public class RecordController {
     }
 
     @GetMapping("/records")
-    public List<RecordDto> readRecords(@RequestParam("date") String date) {
+    public List<RecordDto> readRecords(@RequestParam(value="date", required = false) String date) {
+        System.out.println("넘어오는 날짜: " + date);
         return recordService.readRecords(date);
     }
 
@@ -36,7 +37,7 @@ public class RecordController {
     }
 
     @GetMapping("/recordCnt")
-    public int recordCnt(@RequestParam(value="date", required = false) String date) {
+    public int recordCnt(@RequestParam(value="date", required = false) String date) { // 기본적으로 없어도 되는 값이기 때문에 required=false 해줌
         System.out.println("쿼리파람 날짜: " + date);
         return recordService.recordCnt(date);
     }

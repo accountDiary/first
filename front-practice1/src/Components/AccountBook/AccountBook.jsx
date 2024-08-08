@@ -3,13 +3,16 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Calendar from "../Container/Calendar";
 import AccountInputTable from "./AccountInputTable";
 import { getCategories, getPaymentList } from "../../Api/api.categories.js";
-import { saveRecords, recordCntDate } from "../../Api/api.record.js";
+import { saveRecords, recordCntDate, loadRecords } from "../../Api/api.record.js";
 import "../../Css/AccountBook.css";
 import AccountShowTable from "./AccountShowTable.jsx";
 
 export default function AccountBook() {
   const [categories, setCategories] = useState([]);
   const [paymentCategories, setPaymentCategories] = useState([]);
+  const [records, setRecords] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isSaveSuccessful, setIsSaveSuccessful] = useState(false);
 
   const [rows, setRows] = useState([
     {
@@ -24,7 +27,6 @@ export default function AccountBook() {
 
   const [searchParams] = useSearchParams();
   const date = searchParams.get("date");
-  // const userNickname = searchParams.get("user");
 
   const [recordCnt, setRecordCnt] = useState(0);
 
@@ -33,22 +35,48 @@ export default function AccountBook() {
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
     getPaymentList().then((data) => setPaymentCategories(data));
-    recordCntDate(date).then((count) => setRecordCnt(count));
-    
+  }, []);
+
+  useEffect(() => {
+    recordCntDate(date).then((data) => {
+      setRecordCnt(data);
+      if (data > 0) {
+        loadRecords(date).then((data) => {
+          setRecords(data);
+          setRows(data.map(record => ({
+            category: record.record_category_type,
+            subCategory: record.category_id,
+            paymentType: record.payment_id,
+            recordAmount: record.record_amount,
+            recordDetails: record.record_details,
+            subCategories: [],  // 필요 시 API 호출로 로드
+          })));
+        });
+      } else {
+        setRows([{
+          category: "",
+          subCategory: "",
+          paymentType: "",
+          recordAmount: "",
+          recordDetails: "",
+          subCategories: [],
+        }]);
+      }
+    });
   }, [date]);
 
   const handleDateClick = (pickDate) => {
     const clickDate = pickDate.dateStr;
-    navigate(`/writeAccountBook?date=${clickDate}`);
+    navigate(`/accountBook?date=${clickDate}`);
+    setIsEditing(false);
   };
 
   const handleSaveClick = () => {
-    // .some() 메서드는 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나 이상 통과하는지 테스트할 수 있음
-    // 주어진 함수가 참이면 true, 거짓이면 false 반환
-    const hasEmptyCategory = rows.some((row) => !row.category.trim());
-    const hasEmptySubCategory = rows.some((row) => !row.subCategory.trim());
-    const hasEmptyPaymentType = rows.some((row) => !row.paymentType.trim());
-    const hasEmptyAmount = rows.some((row) => !row.recordAmount.trim());
+    setIsEditing(false);
+    const hasEmptyCategory = rows.some((row) => !String(row.category).trim());
+    const hasEmptySubCategory = rows.some((row) => !String(row.subCategory).trim());
+    const hasEmptyPaymentType = rows.some((row) => !String(row.paymentType).trim());
+    const hasEmptyAmount = rows.some((row) => !String(row.recordAmount).trim());
 
     if (hasEmptyCategory) {
       alert("수입/지출 카테고리를 확인해주세요.");
@@ -71,7 +99,6 @@ export default function AccountBook() {
       ...row,
       record_date: date,
       user_id: 1,
-      //user_nickname: userNickname,
       record_type: row.category,
       category_id: row.subCategory,
       payment_id: row.paymentType,
@@ -82,12 +109,30 @@ export default function AccountBook() {
     saveRecords(records)
       .then((message) => {
         alert(message);
-        // navigate(`/writeAccountBook?date=${date}`);
+        setIsSaveSuccessful(true);
+        setRecords(records);
       })
       .catch((error) => {
         console.error("에러: ", error);
         alert(error);
       });
+  };
+
+  const handleModifyClick = () => {
+    setRows(records.map(record => ({
+      category: record.record_category_type,
+      subCategory: record.category_id,
+      paymentType: record.payment_id,
+      recordAmount: record.record_amount,
+      recordDetails: record.record_details,
+      subCategories: [],  // 필요 시 API 호출로 로드
+    })));
+    setIsEditing(true);
+  };
+
+  const handleUpdateClick = () => {
+    setIsEditing(false);
+    // 추가적인 수정 로직이 필요한 경우 여기에 추가
   };
 
   return (
@@ -99,30 +144,50 @@ export default function AccountBook() {
         <div>
           <h2>{date}</h2>
         </div>
-        <div className="account-container">
-          {recordCnt === 0 ? (
-            <AccountInputTable
-              categories={categories}
-              paymentCategories={paymentCategories}
-              rows={rows}
-              setRows={setRows}
-            />
-          ) : (
-            <AccountShowTable recordDate={date} />
-          )}
-        </div>
-        <div className="daily-account">
-          오늘의 소비 총평
-          <div>
-            <textarea
-              id="todaysReview"
-              placeholder="내용을 입력해주세요."
-            ></textarea>
-          </div>
-        </div>
-        <button type="button" onClick={handleSaveClick}>
-          등록하기
-        </button>
+        {recordCnt === 0 || isEditing ? (
+          <>
+            <div className="account-container">
+              <AccountInputTable
+                categories={categories}
+                paymentCategories={paymentCategories}
+                rows={rows}
+                setRows={setRows}
+              />
+            </div>
+            <div className="daily-account">
+              오늘의 소비 총평
+              <div>
+                <textarea
+                  id="todaysReview"
+                  placeholder="내용을 입력해주세요."
+                  disabled={!isEditing}
+                ></textarea>
+              </div>
+            </div>
+            <button type="button" onClick={isEditing ? handleUpdateClick : handleSaveClick}>
+              {isEditing ? "저장하기" : "등록하기"}
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="account-container">
+              <AccountShowTable
+                recordDate={date}
+                records={records}
+                setRecords={setRecords}
+              />
+            </div>
+            <div className="daily-account">
+              오늘의 소비 총평
+              <div>
+                <textarea id="todaysReview" disabled></textarea>
+              </div>
+            </div>
+            <button type="button" onClick={handleModifyClick}>
+              수정하기
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
