@@ -19,8 +19,8 @@ export default function AccountShowTable({ records, setRecords, recordDate }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {records.map((record) => (
-                        <tr key={record.record_id}>
+                    {records.map((record, index) => (
+                        <tr key={`${record.record_id}${index}`}>
                             <td>{record.record_category_type}</td>
                             <td>{record.category_name}</td>
                             <td>{record.payment_type}</td>

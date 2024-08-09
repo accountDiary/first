@@ -131,7 +131,7 @@ export default function AccountInputTable({
                                     id={`subCategory${index}`}
                                     name={`subCategory${index}`}
                                     options={row.subCategories}
-                                    value={row.subCategories}
+                                    value={row.subCategory}
                                     onChange={(event) =>
                                         handleSubCategoryChange(event, index)
                                     }

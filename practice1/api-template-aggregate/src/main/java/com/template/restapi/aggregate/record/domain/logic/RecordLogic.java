@@ -23,4 +23,8 @@ public class RecordLogic {
     public int recordCnt(String date) {
         return recordStore.recordCnt(date);
     }
+
+    public void modifyRecords(List<RecordDto> recordsLists) {
+        recordStore.updateRecords(recordsLists);
+    }
 }

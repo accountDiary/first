@@ -27,4 +27,12 @@ public class RecordService {
     public int recordCnt(String date) {
         return recordLogic.recordCnt(date);
     }
+
+    public void modifyRecords(List<RecordDto> recordsLists, List<RecordDto> records) {
+        // 기존 가계부 수정
+        recordLogic.modifyRecords(recordsLists);
+
+        // 새로운 가계부 삽입
+        recordLogic.saveRecords(records);
+    }
 }

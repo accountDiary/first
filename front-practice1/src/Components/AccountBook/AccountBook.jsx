@@ -12,7 +12,6 @@ export default function AccountBook() {
   const [paymentCategories, setPaymentCategories] = useState([]);
   const [records, setRecords] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [isSaveSuccessful, setIsSaveSuccessful] = useState(false);
 
   const [rows, setRows] = useState([
     {
@@ -42,15 +41,16 @@ export default function AccountBook() {
       setRecordCnt(data);
       if (data > 0) {
         loadRecords(date).then((data) => {
-          setRecords(data);
-          setRows(data.map(record => ({
+          const mappedRecords = data.map((record) => ({
             category: record.record_category_type,
             subCategory: record.category_id,
             paymentType: record.payment_id,
             recordAmount: record.record_amount,
             recordDetails: record.record_details,
-            subCategories: [],  // 필요 시 API 호출로 로드
-          })));
+            subCategories: [],
+          }));
+          setRecords(data);
+          setRows(mappedRecords);
         });
       } else {
         setRows([{
@@ -109,7 +109,6 @@ export default function AccountBook() {
     saveRecords(records)
       .then((message) => {
         alert(message);
-        setIsSaveSuccessful(true);
         setRecords(records);
       })
       .catch((error) => {

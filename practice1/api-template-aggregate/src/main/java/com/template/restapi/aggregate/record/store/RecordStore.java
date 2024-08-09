@@ -31,4 +31,10 @@ public class RecordStore {
                 .recordsCnt(date);
     }
 
+    public void updateRecords(List<RecordDto> recordsLists) {
+        sqlSessionTemplate
+                .getMapper(RecordRepository.class)
+                .updateRecords(recordsLists);
+    }
+
 }

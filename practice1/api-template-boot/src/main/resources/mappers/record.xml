@@ -40,9 +40,28 @@
     </insert>
 
     <!-- 해당하는 날짜에 있는 가계부 개수 -->
-    <select id="recordsCnt" resultType="int">
+    <select id="recordsCnt" parameterType="map" resultType="int">
         SELECT COUNT(*)
         FROM record
         WHERE record_date=#{record_date}
+        AND user_id=1
     </select>
+
+    <!-- 해당되는 가계부 기록 수정 -->
+    <update id="updateRecords" parameterType="java.util.List">
+        <foreach collection="recordsLists" item="record" separator=";">
+            UPDATE record
+            SET
+                record_type=#{record.record_type},
+                payment_id=#{record.payment_id},
+                category_id=#{record.category_id},
+                record_amount=#{record.record_amount},
+                record_details=#{record.record_details},
+                record_date=#{record.record_date}
+            WHERE
+                record_id=#{record.record_id}
+            AND
+                user_id=1
+        </foreach>
+    </update>
 </mapper>

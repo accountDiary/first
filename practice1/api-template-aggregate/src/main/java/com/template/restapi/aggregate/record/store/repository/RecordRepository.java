@@ -19,4 +19,9 @@ public interface RecordRepository {
     void insertRecords(@Param("records") List<RecordDto> records);
 
     int recordsCnt(@Param("record_date") String date);
+
+    void updateRecords(@Param("recordsList") List<RecordDto> recordsLists);
+
+
+
 }
